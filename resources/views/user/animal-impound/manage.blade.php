@@ -1,12 +1,11 @@
-@extends('layouts.admin')
+@extends('layouts.user')
+@section('title', is_null($resourceData->id) ? 'New impound request' : 'Update impound request')
 
-@section('title', 'Impounded Animals')
 @section('content')
 
 @if($errors->count())
     <div class="alert alert-danger">
         Please verify all fields to be correct
-        @json($errors->all())
     </div>
 @endif
 <div class="row">
@@ -41,34 +40,17 @@
                                 {!! Form::inputGroup('text', 'Name', 'name') !!}
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-sm-4">
-                                {!! Form::inputGroup('date', 'Date Seized', 'date_seized') !!}
-                            </div>
-                            <div class="col-sm-8">
-                                {!! Form::inputGroup('text', 'Location', 'area') !!}
-                                {!! Form::hidden('area_longitude') !!}
-                                {!! Form::hidden('area_latitude') !!}
-                            </div>
-                        </div>
                         {!! Form::textAreaGroup('Description and remarks', 'description', null, ['rows' => 3]) !!}
-                        <div class="row align-items-center">
-                            @if($resourceData->submitted_by)
-                                <div class="col-3">
-                                    {!! Form::selectGroup('Adoption Status', 'status', ['' => '', 'eligible' => 'Eligible', 'ineligible' => 'Ineligible']) !!}
-                                </div>
-                            @endif
-                            <div class="col-6">
-                                 <div class="text-primary">
-                                    {!! Form::checkbox('vaccination_status', 1, 'The animal has been vaccinated?', null) !!}
-                                </div>
-                            </div>
+                        <div class="text-primary">
+                            {!! Form::checkbox('vaccination_status', 1, 'The animal has been vaccinated?', null) !!}
                         </div>
+
                     </div>
                 </div>
                 <hr>
                 <button type="submit" class="btn btn-success">Submit</button>
                 {!! Form::close() !!}
+
             </div>
         </div>
     </div>

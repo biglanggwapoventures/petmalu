@@ -23,10 +23,14 @@ class CreateAnimalAdoptionsTable extends Migration
             $table->double('area_longitude')->nullable();
             $table->double('area_latitude')->nullable();
             $table->boolean('vaccination_status')->default(0);
-            $table->date('date_seized');
+            $table->date('date_seized')->nullable();
             $table->text('photo')->nullable();
+            $table->unsignedInteger('submitted_by')->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamp('rejected_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('submitted_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manage Adoptions')
+@section('title', 'Impounded Animals')
 @section('content')
 <div class="row">
     <div class="col">
@@ -28,15 +28,18 @@
                     <td>{{ ucfirst($row->sex) }}</td>
                     <td>{{ date_create($row->date_seized)->format('M d, Y') }}</td>
                     <td>{{ $row->area }}</td>
-                    <td>N/A</td>
+                    <td>{{ $row->adoption_status_text }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-secondary"><i class="fa fa-pencil"></i> Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                        <a href="{{ route('admin.animal-adoption.edit', $row->id) }}" class="btn btn-sm btn-secondary"><i class="fa fa-pencil"></i> Edit</a>
+
+                        {!! Form::open(['url' => route('admin.animal-adoption.destroy', $row->id), 'method' => 'DELETE', 'style' => 'display:inline-block']) !!}
+                            <a href="#" class="btn btn-sm btn-danger trash-row"><i class="fa fa-trash"></i> Delete</a>
+                        {!! Form::close() !!}
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center text-info">No data to show</td>
+                    <td colspan="8" class="text-center text-info">No data to show</td>
                 </tr>
                 @endforelse
             </tbody>

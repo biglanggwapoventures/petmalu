@@ -25,10 +25,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.animal-adoption.index') }}">Manage Adoptions</a>
+            <a class="nav-link" href="{{ route('admin.animal-adoption.index') }}">Impounded Animals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Impounds</a>
+            <a class="nav-link" href="#">Adoption Requests </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Reports</a>
