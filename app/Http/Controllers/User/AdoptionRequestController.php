@@ -21,8 +21,8 @@ class AdoptionRequestController extends BaseController
         $this->resourceModel = $model;
         $this->request = $request;
         $this->validationRules = [
-            'store' => $this->validationArray(),
-            'update' => $this->validationArray(),
+            'store' => $this->storeActionValidator(),
+            'update' => $this->updateActionValidator(),
         ];
     }
 
@@ -48,6 +48,11 @@ class AdoptionRequestController extends BaseController
 
     protected function validationArray()
     {
+
+    }
+
+    protected function storeActionValidator()
+    {
         return [
             'adoption_purpose' => 'required|string',
             'pet_id' => [
@@ -63,5 +68,10 @@ class AdoptionRequestController extends BaseController
                 }),
             ],
         ];
+    }
+
+    public function updateActionValidator()
+    {
+        return [];
     }
 }

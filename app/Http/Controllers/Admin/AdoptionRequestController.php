@@ -11,6 +11,13 @@ class AdoptionRequestController extends UserAdoptionRequestController
         return $query->with(['pet.owner', 'requestor'])->latest();
     }
 
+    public function updateActionValidator()
+    {
+        return [
+            'request_status' => 'required|in:pending,approved,rejected',
+        ];
+    }
+
     public function beforeShow($data)
     {
 

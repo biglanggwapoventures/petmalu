@@ -72,10 +72,17 @@
                     <tr>
                         <td>Actions</td>
                         <td>
-                            {!! Form::open(['url' => '', 'method' => 'patch', 'class' => 'ajax']) !!}
-                            {!! Form::select('adoption_status') !!}
-                            <button type="submit" class="btn btn-success" >Approve</button>
-                            <button type="submit" class="btn btn-danger">Reject</button>
+                            {!! Form::open(['url' => MyHelper::resource('update', $resourceData->id), 'method' => 'patch', 'class' => 'ajax']) !!}
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="form-group mb-0">
+                                        {!! Form::select('request_status', ['pending'  => 'Pending', 'approved' => 'Approve', 'rejected' => 'Reject'], $resourceData->request_status, ['class' => 'form-select']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="submit" class="btn btn-info">Save</button>
+                                </div>
+                            </div>
                             {!! Form::close() !!}
                         </td>
                     </tr>
