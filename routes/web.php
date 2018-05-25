@@ -21,10 +21,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
-    Route::resource('animal-adoption', 'AnimalAdoptionController');
-    Route::get('map', 'MapController')->name('map');
+    Route::resource('pet-registration', 'PetRegistrationController');
+    Route::resource('adoption-request', 'AdoptionRequestController');
+
+    // Route::resource('animal-adoption', 'AnimalAdoptionController');
+    // Route::get('map', 'MapController')->name('map');
 });
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.'], function () {
-    Route::resource('animal-impound', 'AnimalImpoundController');
+    // Route::resource('animal-impound', 'AnimalImpoundController');
+    Route::resource('pet-registration', 'PetRegistrationController');
+    Route::resource('adoption-request', 'AdoptionRequestController');
 });

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\AdoptionRequest;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -26,4 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function adoptionRequest(Pet $pet)
+    {
+        return $pet->adoptionRequests()->whereUserId($this->id)->first();
+    }
+
+    public function adoptionRequests()
+    {
+        return $this->hasMany(AdoptionRequest::class);
+    }
 }

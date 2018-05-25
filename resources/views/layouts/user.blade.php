@@ -18,15 +18,24 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">{{ config('app.name', 'Laravel') }}</a>
+        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           @auth
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a href="{{ route('user.animal-impound.index') }}" class="nav-link" >Impounds</a></li>
-            <li class="nav-item"><a href="#" class="nav-link" >Reports</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Pet Registration
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('user.pet-registration.index') }}">Track registrations</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ route('user.pet-registration.create') }}">Register new pet</a>
+              </div>
+            </li>
+          <li class="nav-item"><a href="{{ route('user.adoption-request.index') }}" class="nav-link">Adoption Requests</a></li>
           </ul>
           @endauth
           <ul class="navbar-nav ml-auto">
@@ -37,7 +46,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
-                <a class="dropdown-item" href="{{ route('admin.animal-adoption.index') }}"><i class="fa fa-diamond fa-fw"></i> Admin Page</a>
+                <a class="dropdown-item" href="{{ route('admin.pet-registration.index') }}"><i class="fa fa-diamond fa-fw"></i> Admin Page</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item logout" href="#" class=""><i class="fa fa-sign-out fa-fw"></i> Log me out</a>
                 {!! Form::open(['url' => url('logout'), 'method' => 'POST', 'id' => 'logout-form']) !!}
@@ -60,6 +69,7 @@
     <!-- Page Content -->
 
     <div class="container pt-3">
+      @if(!isset($hidePageHeader))
       <div class="row align-items-center mb-3">
           <div class="col">
               <h4 class="mb-0">@yield('title')</h4>
@@ -72,6 +82,7 @@
                 @endif
           </div>
       </div>
+      @endif
       @yield('content')
 
   </div>

@@ -19,7 +19,7 @@
       <!-- /.row -->
 
       <!-- Call to Action Well -->
-      <h4 class="pb-2 border-bottom mb-3">Animals for Adoption</h4>
+      <h4 class="pb-2 border-bottom mb-3">Pets for Adoption</h4>
 
       <!-- Content Row -->
       <div class="row">
@@ -29,16 +29,14 @@
             <div style="height: 150px;background-image: url('{{ $item->photo_filepath }}');background-repeat: no-repeat;background-size: cover;background-position: center center">
             </div>
               <div class="card-body">
-                <h5 class="card-title">{{ $item->name }}</h5>
-                <p class="card-text">{{ $item->description }}</p>
+                <h5 class="card-title">{{ $item->pet_name }}</h5>
                 <dl class="row">
-                  <dt class="col-sm-6">Type</dt>
-                  <dd class="col-sm-6">{{ ucfirst($item->animal_type) }}</dd>
-                  <dt class="col-sm-6">Vaccinated</dt>
-                  <dd class="col-sm-6">{{ $item->vaccination_status ? 'Yes' : 'No' }}</dd>
+                  <dt class="col-sm-5">Species</dt>
+                  <dd class="col-sm-7">{{ ucfirst($item->species) }}</dd>
+                  <dt class="col-sm-5">Breed</dt>
+                  <dd class="col-sm-7">{{ $item->breed }}</dd>
                 </dl>
-                <a href="" class="btn btn-info mb-0 btn-sm btn-block mb-1">More Details</a>
-                <a href="" class="btn btn-success mt-0 btn-sm btn-block" >Adopt me</a>
+                <a href="{{ route('user.adoption-request.create', ['pet_id' => $item->id]) }}" class="btn btn-success mt-0 btn-sm btn-block" >Adopt</a>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\AnimalAdoption;
+use App\Pet;
 
 class HomeController extends Controller
 {
@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('welcome', [
-            'items' => AnimalAdoption::eligible()->get(),
+            'items' => Pet::forAdoption()->get(),
         ]);
     }
 }

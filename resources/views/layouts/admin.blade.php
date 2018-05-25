@@ -25,16 +25,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.animal-adoption.index') }}">Impounded Animals</a>
+            <a class="nav-link" href="{{ route('admin.pet-registration.index') }}">Pet Registrations</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Adoption Requests </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Reports</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.map') }}">Map</a>
+            <a class="nav-link" href="{{ route('admin.adoption-request.index') }}">Adoption Requests </a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -57,15 +51,17 @@
   </div>
 
   <main class="container mt-2">
-    <div class="row align-items-center mb-3">
+    <div class="row align-items-center mb-3 mt-2">
       <div class="col">
-        <h1 class="mb-0">@yield('title', 'Section Title')</h1>
+        <h4 class="mb-0">@yield('title', 'Section Title')</h4>
       </div>
       <div class="col text-right">
-         @if(MyHelper::resourceMethodIn(['create', 'edit']))
+         @if(MyHelper::resourceMethodIn(['create', 'edit', 'show']))
           <a href="{{ MyHelper::resource('index') }}" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Back to list</a>
         @elseif(MyHelper::resourceMethodIn(['index']))
-          <a href="{{ MyHelper::resource('create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New entry</a>
+          @if(!isset($hideNewEntryLink))
+            <a href="{{ MyHelper::resource('create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New entry</a>
+          @endif
         @endif
       </div>
     </div>
