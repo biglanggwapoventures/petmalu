@@ -33,7 +33,6 @@
                         <a href="#" class="btn btn-danger btn-block mt-2">Cancel</a>
                     </p>
                 @else
-                    <h5 class="card-title">State your purpose</h5>
                     {!! Form::open(['url' => route('user.adoption-request.store'), 'method' => 'POST', 'class' => 'ajax']) !!}
                     {!! Form::textareaGroup(null, 'adoption_purpose', null, ['rows' => '3']) !!}
                     {!! Form::hidden('pet_id', $pet->id) !!}

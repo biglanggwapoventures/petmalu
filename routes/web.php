@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -24,8 +13,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
 
-    // Route::resource('animal-adoption', 'AnimalAdoptionController');
-    // Route::get('map', 'MapController')->name('map');
+    Route::group(['prefix' => 'pet/{pet}/manage-adoption-requests', 'as' => 'pet-adoption-requests.'], function () {
+        Route::get('/', 'ManagePetAdoptionRequestsController@index')->name('index');
+        Route::post('/', 'ManagePetAdoptionRequestsController@approve')->name('approve');
+    });
+
+    Route::post('adoption-request/{adoptionRequest}/send-notification', 'AdoptionRequestNotificationController')->name('adoption-request-notification');
+
 });
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.'], function () {

@@ -24,6 +24,7 @@
                     <td>{{ $row->pet_name }}</td>
                     <td>{{ ucfirst($row->species) }}</td>
                     <td>{{ $row->breed ?: '-' }}</td>
+
                     <td>{{ $row->created_at->format('m/d/Y h:i A') }}</td>
                     <td>{{ ucfirst($row->registration_status) }}</td>
                     <td>

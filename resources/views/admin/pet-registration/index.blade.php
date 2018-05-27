@@ -3,13 +3,14 @@
 
 @section('content')
 
-<table class="table mt-0">
+<table class="table mt-0 table-hover">
     <thead>
         <tr>
             <th>Pet Name</th>
             <th>Species</th>
             <th>Breed</th>
             <th>Date Registered</th>
+            <th>Owner</th>
             <th>Status</th>
             <th></th>
         </tr>
@@ -21,6 +22,7 @@
             <td>{{ ucfirst($row->species) }}</td>
             <td>{{ $row->breed ?: '-' }}</td>
             <td>{{ $row->created_at->format('m/d/Y h:i A') }}</td>
+            <td>{{ $row->owner->name }}</td>
             <td>{{ ucfirst($row->registration_status) }}</td>
             <td>
                 <a href="{{ route('admin.pet-registration.edit', $row->id) }}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit</a>

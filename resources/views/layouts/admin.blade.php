@@ -50,17 +50,17 @@
     </nav>
   </div>
 
-  <main class="container mt-2">
-    <div class="row align-items-center mb-3 mt-2">
+  <main class="container pt-3">
+    <div class="row align-items-center mb-3">
       <div class="col">
         <h4 class="mb-0">@yield('title', 'Section Title')</h4>
       </div>
       <div class="col text-right">
          @if(MyHelper::resourceMethodIn(['create', 'edit', 'show']))
-          <a href="{{ MyHelper::resource('index') }}" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Back to list</a>
+          <a href="{{ MyHelper::resource('index') }}" class="btn btn-primary btn-sm"><i class="fa fa-chevron-left"></i> Back to list</a>
         @elseif(MyHelper::resourceMethodIn(['index']))
           @if(!isset($hideNewEntryLink))
-            <a href="{{ MyHelper::resource('create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New entry</a>
+            <a href="{{ MyHelper::resource('create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New entry</a>
           @endif
         @endif
       </div>

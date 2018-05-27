@@ -11,6 +11,7 @@
           <div class="modal-body">
             {!! Form::inputGroup('text', 'Full Name', 'name') !!}
             {!! Form::textAreaGroup('Address', 'address', null, ['rows' => '2']) !!}
+            {!! Form::inputGroup('number', 'Mobile Number', 'mobile_number', null, ['placeholder' => '09XXXXXXXXX']) !!}
             <div class="row">
                 <div class="col-sm-6">
                     {!! Form::inputGroup('email', 'Email Address', 'email') !!}

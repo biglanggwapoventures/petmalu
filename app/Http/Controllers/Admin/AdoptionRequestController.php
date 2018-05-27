@@ -3,12 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\User\AdoptionRequestController as UserAdoptionRequestController;
+use App\Pet;
 
 class AdoptionRequestController extends UserAdoptionRequestController
 {
-    public function beforeIndex($query)
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        return $query->with(['pet.owner', 'requestor'])->latest();
+        $result = Pet::profile()
+            ->forAdoption()
+            ->has('adoptionRequests', '>=', 1)
+            ->withCount('adoptionRequests')
+            ->get();
+
+        $this->viewData['resourceList'] = $result;
+
+        return view(
+            "{$this->viewBaseDir}.{$this->viewFiles['index']}",
+            $this->viewData
+        );
     }
 
     public function updateActionValidator()

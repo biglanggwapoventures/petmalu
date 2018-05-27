@@ -8,7 +8,7 @@ class PetRegistrationController extends UserPetRegistrationController
 {
     public function beforeIndex($query)
     {
-
+        $query->with('owner');
     }
 
     protected function validationArray()

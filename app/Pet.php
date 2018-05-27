@@ -18,6 +18,10 @@ class Pet extends Model
         'photo_filepath',
     ];
 
+    protected $hidden = [
+        'updated_at',
+    ];
+
     protected $fillable = [
         'origin',
         'origin_latitude',
@@ -50,7 +54,7 @@ class Pet extends Model
 
     public function scopeFieldsForMasterList($query)
     {
-        return $query;
+        return $query->latest();
     }
 
     public function getPhotoFilepathAttribute()
@@ -70,12 +74,31 @@ class Pet extends Model
 
     public function adoptionRequests()
     {
-        return $this->hasMany(AdoptionRequest::class);
+        return $this->hasMany(AdoptionRequest::class)->orderBy('created_at');
     }
 
     public function approvedAdoptionRequest()
     {
         return $this->hasOne(AdoptionRequest::class)->whereRequestStatus('approved');
+    }
+
+    public function scopeWithAdoptionRequests($query)
+    {
+        return $query->whereHas('adoptionRequests')->with('adoptionRequests');
+    }
+
+    public function scopeProfile($query)
+    {
+        $query->select('id', 'pet_name', 'breed', 'species', 'origin', 'origin_latitude', 'origin_longitude', 'ownership', 'habitat', 'color', 'photo');
+    }
+
+    public function isAdopted()
+    {
+        if ($this->relationLoaded('approvedAdoptionRequest')) {
+            return (bool) $this->approvedAdoptionRequest;
+        }
+
+        return $this->approvedAdoptionRequest()->exists();
     }
 
 }

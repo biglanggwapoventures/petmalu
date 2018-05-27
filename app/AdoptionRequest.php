@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Facades\SMS;
 use App\Pet;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,11 @@ class AdoptionRequest extends Model
         'created_at',
     ];
 
+    protected $hidden = [
+        'updated_at',
+        'deleted_at',
+    ];
+
     public function scopeFieldsForMasterList($query)
     {
         return $query;
@@ -31,5 +37,11 @@ class AdoptionRequest extends Model
     public function requestor()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function notifyRequestorViaSMS()
+    {
+        $message = new SMS($this->requestor->mobile_number, 'Hello, please go to the pound');
+        return $message->send();
     }
 }

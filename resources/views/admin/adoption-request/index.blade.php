@@ -1,38 +1,29 @@
 @extends('layouts.admin', ['hideNewEntryLink' => true])
 @section('title', 'Adoption Requests')
+
+
 @section('content')
+<div class="row">
+    @foreach($resourceList as $item)
+      <div class="col-sm-3">
+        <div class="card">
+        <div style="height: 150px;background-image: url('{{ $item->photo_filepath }}');background-repeat: no-repeat;background-size: cover;background-position: center center">
+        </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ $item->pet_name }}</h5>
+            <dl class="row">
+              <dt class="col-sm-6">Species</dt>
+              <dd class="col-sm-6 mb-0">{{ ucfirst($item->species) }}</dd>
+              <dt class="col-sm-6">Breed</dt>
+              <dd class="col-sm-6 mb-0">{{ $item->breed }}</dd>
+              <dt class="col-sm-6">Request Count</dt>
+              <dd class="col-sm-6 mb-0">{{ $item->adoption_requests_count }}</dd>
+            </dl>
+            <a href="{{ route('admin.pet-adoption-requests.index', $item->id) }}" class="btn btn-info mt-0 btn-sm btn-block" >Manage Requests</a>
+          </div>
+        </div>
+      </div>
+    @endforeach
 
-<table class="table mt-0">
-        <thead>
-            <tr>
-                <th>Date Requested</th>
-                <th>Requested By</th>
-                <th>Pet Name</th>
-                <th>Species</th>
-                <th>Breed</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($resourceList as $row)
-            <tr>
-                <td>{{ $row->created_at->format('m/d/Y h:i a') }}</td>
-                <td>{{ $row->requestor->name }}</td>
-                <td>{{ $row->pet->pet_name }}</td>
-                <td>{{ ucfirst($row->pet->species) }}</td>
-                <td>{{ ucfirst($row->pet->breed) }}</td>
-                <td>{{ ucfirst($row->request_status) }}</td>
-                <td>
-                    <a href="{{ route('admin.adoption-request.show', $row->id) }}" class="btn btn-info btn-sm">View</a>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="8" class="text-center text-info">No pet requests registered</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-
+  </div>
 @endsection
