@@ -27,12 +27,12 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Pet Registration
+                Impound Requests
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('user.pet-registration.index') }}">Track registrations</a>
+                <a class="dropdown-item" href="{{ route('user.pet-registration.index') }}">Track Requests</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ route('user.pet-registration.create') }}">Register new pet</a>
+                <a class="dropdown-item" href="{{ route('user.pet-registration.create') }}">New Request</a>
               </div>
             </li>
           <li class="nav-item"><a href="{{ route('user.adoption-request.index') }}" class="nav-link">Adoption Requests</a></li>

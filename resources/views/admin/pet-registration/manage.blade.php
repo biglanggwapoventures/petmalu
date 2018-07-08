@@ -10,9 +10,26 @@
         @else
             {!! Form::model($resourceData, ['url' => MyHelper::resource('update', ['id' => $resourceData->id]), 'method' => 'PATCH', 'files' => true, 'class' => 'ajax', 'data-next-url' => MyHelper::resource('index')]) !!}
         @endif
+        @if($resourceData->id)
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading">Reason for impound</h4>
+              <p class="mb-0">{!! $resourceData->reason ?: '<em>No reason specified</em>' !!}</p>
+            </div>
+        @endif
         <div class="form-row">
+
             <div class="col-sm-5">
                 {!! Form::inputGroup('text', 'Pet Name', 'pet_name') !!}
+            </div>
+            <div class="col-sm-7">
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        {!! Form::inputGroup('date', 'Date Seized', 'date_seized') !!}
+                    </div>
+                    <div class="col-sm-6">
+                        {!! Form::inputGroup('text', 'Cage Number', 'cage_number') !!}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-row">

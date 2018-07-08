@@ -23,9 +23,12 @@ class Pet extends Model
     ];
 
     protected $fillable = [
+        'reason',
         'origin',
         'origin_latitude',
         'origin_longitude',
+        'date_seized',
+        'cage_number',
         'ownership',
         'habitat',
         'species',

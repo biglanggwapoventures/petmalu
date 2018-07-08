@@ -36,7 +36,11 @@
                   <dt class="col-sm-5">Breed</dt>
                   <dd class="col-sm-7">{{ $item->breed }}</dd>
                 </dl>
+                @auth
                 <a href="{{ route('user.adoption-request.create', ['pet_id' => $item->id]) }}" class="btn btn-success mt-0 btn-sm btn-block" >Adopt</a>
+                @else
+                <em><small><a data-toggle="modal" data-target="#registration-modal" href="#">Regisration</a> required  to adopt pet.</small></em>
+                @endif
               </div>
             </div>
           </div>

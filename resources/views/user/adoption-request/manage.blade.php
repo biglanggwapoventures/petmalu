@@ -2,26 +2,63 @@
 
 @section('content')
 <h4 class="mb-3">Pet Adoption Request</h4>
-<div class="row">
+<div class="form-row">
     <div class="col-sm-4">
         <div class="card">
             <img class="card-img-top" src="{{ $pet->photo_filepath }}" alt="Card image cap">
             <table class="table table-hover mb-0 border-bottom">
                 <tbody>
-                    <tr>
-                        <td>Given Name</td>
-                        <td><strong>{{ $pet->pet_name }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Species</td>
-                        <td><strong>{{ ucfirst($pet->species) }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td><strong>{{ ucfirst($pet->breed) }}</strong></td>
-                    </tr>
-                </tbody>
+                  <tr>
+                      <td><strong>Name</strong></td>
+                      <td>{{ $pet->pet_name }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Date Seized</strong></td>
+                      <td>{{ $pet->date_seized ? date_create($pet->date_seized)->format('M d, Y') : '-' }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Species</strong></td>
+                      <td>{{ ucfirst($pet->species) }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Breed</strong></td>
+                      <td>{{ ucfirst($pet->breed) }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Sex</strong></td>
+                      <td>{{ ucfirst($pet->sex) }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Ownership</strong></td>
+                      <td>{{ ucfirst($pet->ownership) }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Habitat</strong></td>
+                      <td>{{ ucfirst(str_replace('_', ' ', $pet->habitat)) }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Birthdate</strong></td>
+                      <td>{{ $pet->birthdate ? date_create($pet->birthdate)->format('M d, Y') : 'n/a' }}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Area</strong></td>
+                      <td>{{ $pet->origin }}</td>
+                  </tr>
+              </tbody>
             </table>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        @if($pet->origin_latitude && $pet->origin_longitude)
+            <div class="card">
+                <div class="card-body p-0" id="map" data-lat="{{ $pet->origin_latitude }}" data-lng="{{ $pet->origin_longitude }}" style="height: 500px;">
+
+                </div>
+            </div>
+        @else
+            <div class="alert alert-danger text-center mb-0"><i class="fa fa-info-circle"></i> No tagged origin for this pet</div>
+        @endif
+        <div class="card mt-2">
             <div class="card-body">
                 @if($request = auth()->user()->adoptionRequest($pet))
                     <p class="card-text">
@@ -33,7 +70,7 @@
                         <a href="#" class="btn btn-danger btn-block mt-2">Cancel</a>
                     </p>
                 @else
-                    <h5 class="card-title">State your purpose</h5>
+                    <h5 class="card-title">State your purpose for adoption</h5>
                     {!! Form::open(['url' => route('user.adoption-request.store'), 'method' => 'POST', 'class' => 'ajax']) !!}
                     {!! Form::textareaGroup(null, 'adoption_purpose', null, ['rows' => '3']) !!}
                     {!! Form::hidden('pet_id', $pet->id) !!}
@@ -43,20 +80,6 @@
             </div>
         </div>
     </div>
-
-    <div class="col-sm-8">
-        @if($pet->origin_latitude && $pet->origin_longitude)
-            <div class="card">
-                <div class="card-body p-0" id="map" data-lat="{{ $pet->origin_latitude }}" data-lng="{{ $pet->origin_longitude }}" style="height: 500px;">
-
-                </div>
-            </div>
-        @else
-            <div class="alert alert-danger text-center"><i class="fa fa-info-circle"></i> No tagged origin for this pet</div>
-        @endif
-    </div>
-
-
 </div>
 
 @endsection

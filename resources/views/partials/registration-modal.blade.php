@@ -25,7 +25,7 @@
                     {!! Form::selectGroup('Gender', 'gender', ['' => '*SELECT*', 'male' => 'Male', 'female' => 'Female']) !!}
                 </div>
                 <div class="col-sm-6">
-                    {!! Form::selectGroup('Civil Status', 'civil_status', ['' => '*SELECT*', 'single' => 'Single', 'married' => 'Married']) !!}
+                    {!! Form::selectGroup('Civil Status', 'civil_status', ['' => '*SELECT*', 'single' => 'Single', 'married' => 'Married', 'others' => 'Others']) !!}
                 </div>
             </div>
             <div class="row">

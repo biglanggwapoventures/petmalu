@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->date('birthdate');
             $table->enum('gender', ['male', 'female']);
-            $table->enum('civil_status', ['single', 'married']);
+            $table->enum('civil_status', ['single', 'married', 'other'])->nullable();
             $table->text('address');
             $table->string('password');
             $table->rememberToken();

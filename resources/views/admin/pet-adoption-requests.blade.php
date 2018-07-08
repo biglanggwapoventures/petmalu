@@ -3,7 +3,7 @@
 
 
 @section('content')
-<div class="row">
+<div class="form-row">
   <div class="col-sm-4">
     <div class="card">
         <img class="card-img-top" src="{{ $pet->photo_filepath }}" alt="Card image cap">
@@ -14,8 +14,20 @@
                   <td>{{ $pet->pet_name }}</td>
               </tr>
               <tr>
+                  <td><strong>Date Seized</strong></td>
+                  <td>{{ $pet->date_seized ? date_create($pet->date_seized)->format('M d, Y') : '-' }}</td>
+              </tr>
+              <tr>
+                  <td><strong>Cage Number</strong></td>
+                  <td>{{ $pet->cage_number }}</td>
+              </tr>
+              <tr>
                   <td><strong>Species</strong></td>
                   <td>{{ ucfirst($pet->species) }}</td>
+              </tr>
+              <tr>
+                  <td><strong>Breed</strong></td>
+                  <td>{{ ucfirst($pet->breed) }}</td>
               </tr>
               <tr>
                   <td><strong>Sex</strong></td>
@@ -32,10 +44,6 @@
               <tr>
                   <td><strong>Birthdate</strong></td>
                   <td>{{ $pet->birthdate ? date_create($pet->birthdate)->format('M d, Y') : 'n/a' }}</td>
-              </tr>
-              <tr>
-                  <td><strong>Breed</strong></td>
-                  <td>{{ ucfirst($pet->breed) }}</td>
               </tr>
               <tr>
                   <td><strong>Area</strong></td>
@@ -71,7 +79,7 @@
         </tbody>
       </table>
     @endif
-    <div class="card mb-3">
+    <div class="card mb-2">
       <div class="card-header">
           List of Requests
         </div>

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'mobile_number', 'birthdate', 'address', 'gender', 'civil_status', 'password',
+        'name', 'email', 'mobile_number', 'birthdate', 'address', 'gender', 'civil_status', 'password', 'role',
     ];
 
     /**
@@ -36,5 +36,15 @@ class User extends Authenticatable
     public function adoptionRequests()
     {
         return $this->hasMany(AdoptionRequest::class);
+    }
+
+    /**
+     * Determine if user is of current role
+     * @param  String  $role
+     * @return boolean
+     */
+    public function is($role)
+    {
+        return strtolower($role) === strtolower($this->role);
     }
 }

@@ -11,6 +11,8 @@
             <h4 class="card-title">Update Pet Registration</h4>
             {!! Form::model($resourceData, ['url' => MyHelper::resource('update', ['id' => $resourceData->id]), 'method' => 'PATCH', 'files' => true, 'class' => 'ajax', 'data-next-url' => route('user.pet-registration.index')]) !!}
         @endif
+
+        {!! Form::textareaGroup('Reason for impounding', 'reason', null, ['rows' => 3]) !!}
         <div class="form-row">
             <div class="col-sm-5">
                 {!! Form::inputGroup('text', 'Pet Name', 'pet_name') !!}
@@ -60,6 +62,7 @@
                 {!! Form::inputGroup('text', ".. if others", 'other_tag_extra') !!}
             </div>
         </div>
+        @if(auth()->user()->is('admin'))
         <hr>
         <div class="form-row">
             <div class="col-sm-3">
@@ -83,6 +86,8 @@
                 {!! Form::inputGroup('text', 'Vaccination Remarks', 'vaccination_remarks') !!}
             </div>
         </div>
+        {!! Form::textareaGroup('Veterinary attention given', 'veterinary_attention', null, ['rows' => 3]) !!}
+        @endif
         <hr>
         <div class="form-row">
             <div class="col-sm-3">

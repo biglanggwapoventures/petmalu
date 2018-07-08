@@ -49,7 +49,8 @@ class PetRegistrationController extends BaseController
     protected function validationArray()
     {
         return [
-            'photo' => 'nullable|image',
+            'reason' => 'required',
+            'photo' => 'nullable|image|max:3072',
             'ownership' => ['required', Rule::in(['household', 'community'])],
             'habitat' => ['required', Rule::in(['caged', 'leashed', 'roaming', 'house_only'])],
             'species' => ['required', Rule::in(['dog', 'cat', 'others'])],
@@ -59,7 +60,7 @@ class PetRegistrationController extends BaseController
             'color' => 'required|string',
             'sex' => ['required', Rule::in(['male', 'female'])],
             'female_sex_extra' => ['nullable', 'required_if:sex,female', Rule::in(['intact', 'spayed', 'pregnant', 'lactating'])],
-            'num_puppies' => 'nullable|required_if:sex,female|integer',
+            'num_puppies' => 'nullable|required_if:sex,female|integer|max:0',
             'tag' => ['nullable', Rule::in(['collar', 'microchip', 'tattoo_code', 'others'])],
             'other_tag_extra' => 'nullable|required_if:tag,others|string',
             'other_animal_contact' => ['required', Rule::in(['frequent', 'seldom', 'never'])],
