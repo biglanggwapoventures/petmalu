@@ -30,6 +30,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.adoption-request.index') }}">Adoption Requests </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.adopted-pets.index') }}">Adopted Pets </a>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown active">

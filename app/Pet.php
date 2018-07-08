@@ -67,7 +67,27 @@ class Pet extends Model
 
     public function scopeForAdoption($query)
     {
-        return $query->whereRegistrationStatus('approved')->whereDoesntHave('approvedAdoptionRequest');
+        return $query->whereRegistrationStatus('approved')
+            ->whereDoesntHave('approvedAdoptionRequest');
+    }
+
+    public function scopeAdopted($query)
+    {
+        return $query->whereHas('approvedAdoptionRequest')
+            ->with([
+                'owner:id,name',
+                'approvedAdoptionRequest:id,pet_id,user_id,adoption_purpose,adopted_at,proof_of_adoption',
+                'approvedAdoptionRequest.requestor:id,name',
+            ]);
+    }
+
+    public function loadAdoptionDetails()
+    {
+        return $this->load([
+            'owner',
+            'approvedAdoptionRequest',
+            'approvedAdoptionRequest.requestor',
+        ]);
     }
 
     public function owner()
@@ -92,7 +112,7 @@ class Pet extends Model
 
     public function scopeProfile($query)
     {
-        $query->select('id', 'pet_name', 'breed', 'species', 'origin', 'origin_latitude', 'origin_longitude', 'ownership', 'habitat', 'color', 'photo');
+        $query->select('id', 'pet_name', 'breed', 'species', 'origin', 'origin_latitude', 'origin_longitude', 'ownership', 'habitat', 'color', 'photo', 'created_by');
     }
 
     public function isAdopted()

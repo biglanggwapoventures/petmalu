@@ -12,6 +12,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
+    Route::get('adopted-pets', 'AdoptedPetsController')->name('adopted-pets.index');
+    Route::get('adopted-pets/{pet}', 'AdoptedPetsController@show')->name('adopted-pets.show');
 
     Route::group(['prefix' => 'pet/{pet}/manage-adoption-requests', 'as' => 'pet-adoption-requests.'], function () {
         Route::get('/', 'ManagePetAdoptionRequestsController@index')->name('index');
