@@ -15,7 +15,7 @@ class PetRegistrationController extends UserPetRegistrationController
     {
         $validationArray = parent::validationArray();
 
-        unset($validationArray['reason']);
+        unset($validationArray['reason'], $validationArray['service_type']);
 
         $validationArray['origin'] = 'nullable|string';
         $validationArray['origin_latitude'] = 'nullable|numeric';

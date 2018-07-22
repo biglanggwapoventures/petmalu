@@ -40,12 +40,9 @@
               <i class="fa fa-user"></i> Admin
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Profile</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Admin List</a>
-              <a class="dropdown-item" href="#">Manage Users</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Logout</a>
+              <a class="dropdown-item logout" href="#" class=""><i class="fa fa-sign-out fa-fw"></i> Log me out</a>
+                {!! Form::open(['url' => url('logout'), 'method' => 'POST', 'id' => 'logout-form']) !!}
+                {!! Form::close() !!}
             </div>
           </li>
         </ul>

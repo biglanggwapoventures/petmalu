@@ -9,7 +9,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'role:admin'], function () {
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
     Route::get('adopted-pets', 'AdoptedPetsController')->name('adopted-pets.index');
@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 
 });
 
-Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.'], function () {
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => 'role:standard'], function () {
     // Route::resource('animal-impound', 'AnimalImpoundController');
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
