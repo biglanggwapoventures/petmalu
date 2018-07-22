@@ -5,9 +5,12 @@ namespace App;
 use App\Facades\SMS;
 use App\Pet;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdoptionRequest extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'pet_id',
         'user_id',

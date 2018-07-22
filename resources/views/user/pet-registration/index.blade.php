@@ -2,6 +2,11 @@
 
 @section('content')
 
+@if($error = session('deletionError'))
+<div class="alert alert-danger">
+    {{ $error }}
+</div>
+@endif
 <div class="card">
     <div class="card-body mb-0">
         <h4 class="card-title">Pet Registration History</h4>
@@ -28,8 +33,13 @@
                     <td>{{ $row->created_at->format('m/d/Y h:i A') }}</td>
                     <td>{{ ucfirst($row->registration_status) }}</td>
                     <td>
-                        <a href="{{ route('user.pet-registration.edit', $row->id) }}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit</a>
-                        <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                        <a href="{{ route('user.pet-registration.edit', $row->id) }}" class="btn btn-sm btn-info">  <i class="fa fa-pencil"></i> Edit
+                        </a>
+                        <a class="trash-row btn btn-sm btn-danger" href="#">
+                            <i class="fa fa-trash"></i> Trash
+                            {!! Form::open(['url'=> MyHelper::resource('destroy', $row->id), 'method'=> 'DELETE','class'=> 'hidden']) !!}
+                            {!! Form::close()!!}
+                        </a>
                     </td>
                 </tr>
                 @empty

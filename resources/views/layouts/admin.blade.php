@@ -25,7 +25,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.pet-registration.index') }}">Pet Registrations</a>
+            <a class="nav-link" href="{{ route('admin.pet-registration.index') }}">Impound Requests</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.adoption-request.index') }}">Adoption Requests </a>

@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
 
+      @guest
       <!-- Heading Row -->
       <div class="row my-4">
         <div class="col-lg-8">
@@ -17,6 +18,7 @@
         <!-- /.col-md-4 -->
       </div>
       <!-- /.row -->
+      @endguest
 
       <!-- Call to Action Well -->
       <h4 class="pb-2 border-bottom mb-3">Pets for Adoption</h4>

@@ -28,4 +28,5 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.'], funct
     // Route::resource('animal-impound', 'AnimalImpoundController');
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
+    Route::post('cancel-adoption-request', 'CancelAdoptionRequestController')->name('adoption-request.cancel');
 });

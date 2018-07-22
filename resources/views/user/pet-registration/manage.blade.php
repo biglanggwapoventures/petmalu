@@ -11,7 +11,6 @@
             <h4 class="card-title">Update Pet Registration</h4>
             {!! Form::model($resourceData, ['url' => MyHelper::resource('update', ['id' => $resourceData->id]), 'method' => 'PATCH', 'files' => true, 'class' => 'ajax', 'data-next-url' => route('user.pet-registration.index')]) !!}
         @endif
-
         {!! Form::textareaGroup('Reason for impounding', 'reason', null, ['rows' => 3]) !!}
         <div class="form-row">
             <div class="col-sm-5">
@@ -101,14 +100,75 @@
             </div>
         </div>
         <hr>
-            <div class="form-group">
-                <label class="d-block">Upload photo</label>
-                <input type="file" name="photo" class="form-control border-0 p-0" />
+        <div class="form-group">
+            <label class="d-block">Upload photo</label>
+            <input type="file" name="photo" class="form-control border-0 p-0" />
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th colspan="5">Impound Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  class="text-center bg-success text-white">
+                            <td></td>
+                            <td>Registration</td>
+                            <td>Dog Food</td>
+                            <td>Service Fee</td>
+                            <td>Total</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>
+                                {!! Form::radio('service_type', 'pickup', 'Pound personnel will pick up the animal') !!}
+                            </td>
+                            <td class="text-right">150.00</td>
+                            <td class="text-right">1,300.00</td>
+                            <td class="text-right">500.00</td>
+                            <td class="text-right"><strong>1,950.00</strong></td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>
+                                {!! Form::radio('service_type', 'deliver', 'I will deliver the animal to the pound') !!}
+                            </td>
+                            <td class="text-right">150.00</td>
+                            <td class="text-right">1,300.00</td>
+                            <td class="text-right">-</td>
+                            <td class="text-right"><strong>1,450.00</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        <hr>
-        <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+        <button class="btn btn-success" type="submit"> Submit</button>
         {!! Form::close() !!}
     </div>
 </div>
 
 @endsection
+
+
+@push('modals')
+<!-- Modal -->
+<div class="modal fade" id="agreement-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agreement</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+        <button type="button" class="btn btn-success">Accept and confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endpush

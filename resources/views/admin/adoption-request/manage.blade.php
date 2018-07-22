@@ -30,7 +30,10 @@
                     <p class="card-text">
                         <strong class="text-info d-block">{{ $request->adoption_purpose }}</strong>
                         <small class="text-muted">{{ $request->created_at->format('m/d/Y h:i A') }}</small>
-                        <a href="#" class="btn btn-danger btn-block mt-2">Cancel</a>
+                        {!! Form::open(['url' => route('adoption-request'), 'method' => 'POST', 'class' => 'ajax']) !!}
+                            {!! Form::hidden('id', $request->id)!!}
+                            <button type="submit" class="btn btn-danger btn-block mt-2">Cancel this request</button>
+                        {!! Form::close() !!}
                     </p>
                 @else
                     {!! Form::open(['url' => route('user.adoption-request.store'), 'method' => 'POST', 'class' => 'ajax']) !!}

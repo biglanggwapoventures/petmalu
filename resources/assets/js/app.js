@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
     })
     $('body').on('click', '.trash-row', function () {
         if(!confirm('Are you sure you want to delete this entry? This action cannot be undone!')) return;
-        $(this).closest('form').submit();
+        $(this).find('form').submit();
     });
 
     $('.logout').click(function () {

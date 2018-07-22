@@ -55,6 +55,7 @@ class AdoptionRequestController extends BaseController
     {
         return [
             'adoption_purpose' => 'required|string',
+            'agreement' => 'accepted',
             'pet_id' => [
                 'required',
                 Rule::exists('pets', 'id')->where(function ($where) {
@@ -72,6 +73,8 @@ class AdoptionRequestController extends BaseController
 
     public function updateActionValidator()
     {
-        return [];
+        return [
+            'id' => 'required',
+        ];
     }
 }

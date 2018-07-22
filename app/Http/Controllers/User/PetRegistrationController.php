@@ -72,6 +72,26 @@ class PetRegistrationController extends BaseController
             'routine_service_activity' => ['nullable', Rule::in(['castration', 'deworming', 'spaying', 'vitamin_injection', 'others'])],
             'other_routine_service_activity_extra' => 'nullable|required_if:routine_service_activity,others|string',
             'routine_service_remarks' => 'nullable|string',
+            'service_type' => 'required|in:pickup,deliver',
         ];
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $pet = Pet::findOrFail($id);
+
+        if ($pet->is('approved')) {
+            return redirect()
+                ->back()
+                ->with('deletionError', 'Cannot delete approved pets.');
+        }
+
+        return parent::destroy($request, $id);
     }
 }

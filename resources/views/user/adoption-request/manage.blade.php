@@ -67,13 +67,17 @@
                     <p class="card-text">
                         <strong class="text-info d-block">{{ $request->adoption_purpose }}</strong>
                         <small class="text-muted">{{ $request->created_at->format('m/d/Y h:i A') }}</small>
-                        <a href="#" class="btn btn-danger btn-block mt-2">Cancel</a>
+                        {!! Form::open(['url' => route('user.adoption-request.cancel'), 'method' => 'POST', 'onsubmit' => "javascript: return confirm('Are you sure?')"]) !!}
+                            {!! Form::hidden('id', $request->id)!!}
+                            <button  type="submit" class="btn btn-danger btn-block mt-2">Cancel this request</button>
+                        {!! Form::close() !!}
                     </p>
                 @else
                     <h5 class="card-title">State your purpose for adoption</h5>
                     {!! Form::open(['url' => route('user.adoption-request.store'), 'method' => 'POST', 'class' => 'ajax']) !!}
                     {!! Form::textareaGroup(null, 'adoption_purpose', null, ['rows' => '3']) !!}
                     {!! Form::hidden('pet_id', $pet->id) !!}
+                    {!! Form::checkbox('agreement', '1', 'I agree to pay 150.00 in adoption fees.') !!}
                     <button type="submit" class="btn btn-block btn-success">Send request</button>
                     {!! Form::close() !!}
                 @endif

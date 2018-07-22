@@ -2,6 +2,11 @@
 
 @section('content')
 
+@if($flash = session('message'))
+<div class="alert alert-{{ $flash['state'] }}">
+    {{ $flash['message'] }}
+</div>
+@endif
 <div class="card">
     <div class="card-body mb-0">
         <h4 class="card-title">Pet Adoption Requests</h4>
@@ -29,7 +34,10 @@
                     <td>{{ $row->adoption_purpose }}</td>
                     <td>{{ ucfirst($row->request_status) }}</td>
                     <td>
-                        <a href="" class="btn btn-danger btn-sm">Cancel</a>
+                        {!! Form::open(['url' => route('user.adoption-request.cancel'), 'method' => 'POST', 'onsubmit' => "javascript: return confirm('Are you sure?')"]) !!}
+                            {!! Form::hidden('id', $row->id)!!}
+                            <button  type="submit" class="btn btn-danger btn-sm mt-2">Cancel</button>
+                        {!! Form::close() !!}
                     </td>
                 </tr>
                 @empty

@@ -53,6 +53,7 @@ class Pet extends Model
         'registration_status',
         'created_by',
         'photo',
+        'service_type',
     ];
 
     public function scopeFieldsForMasterList($query)
@@ -122,6 +123,11 @@ class Pet extends Model
         }
 
         return $this->approvedAdoptionRequest()->exists();
+    }
+
+    public function is($status)
+    {
+        return $this->registration_status === strtolower($status);
     }
 
 }
