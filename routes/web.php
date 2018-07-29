@@ -22,9 +22,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
 
     Route::post('adoption-request/{adoptionRequest}/send-notification', 'AdoptionRequestNotificationController')->name('adoption-request-notification');
 
+    // Route::get('report', 'ReportsController');
+    Route::group(['prefix' => 'reports'], function () {
+        // Route::get('impound-logs', 'ImpoundLogsController')
+        // Route::get('adoptions-logs', 'AdoptionLogsController')
+    });
+
 });
 
-Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => 'role:standard'], function () {
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => 'role:standard,admin'], function () {
     // Route::resource('animal-impound', 'AnimalImpoundController');
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
