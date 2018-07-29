@@ -60,7 +60,7 @@ class PetRegistrationController extends BaseController
             'color' => 'required|string',
             'sex' => ['required', Rule::in(['male', 'female'])],
             'female_sex_extra' => ['nullable', 'required_if:sex,female', Rule::in(['intact', 'spayed', 'pregnant', 'lactating'])],
-            'num_puppies' => 'nullable|required_if:sex,female|integer|min:0',
+            'num_puppies' => ['nullable', 'integer'],
             'tag' => ['nullable', Rule::in(['collar', 'microchip', 'tattoo_code', 'others'])],
             'other_tag_extra' => 'nullable|required_if:tag,others|string',
             'other_animal_contact' => ['required', Rule::in(['frequent', 'seldom', 'never'])],

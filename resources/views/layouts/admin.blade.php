@@ -40,6 +40,9 @@
               <i class="fa fa-user"></i> Admin
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              @if(auth()->user()->is('admin'))
+                <a class="dropdown-item" href="{{ url('/') }}"><i class="fa fa-diamond fa-fw"></i> Homepage</a>
+              @endif
               <a class="dropdown-item logout" href="#" class=""><i class="fa fa-sign-out fa-fw"></i> Log me out</a>
                 {!! Form::open(['url' => url('logout'), 'method' => 'POST', 'id' => 'logout-form']) !!}
                 {!! Form::close() !!}

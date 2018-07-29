@@ -88,6 +88,7 @@ jQuery(document).ready(function($) {
             }
         })
     })
+
     $('body').on('click', '.trash-row', function () {
         if(!confirm('Are you sure you want to delete this entry? This action cannot be undone!')) return;
         $(this).find('form').submit();
@@ -97,4 +98,32 @@ jQuery(document).ready(function($) {
         if(!confirm('Are you sure you want to logout?')) return;
         $('#logout-form').submit();
     })
+
+    // $('#num_puppies').attr('disabled', 'disabled')
+
+    $('[name=sex]').change(function(event) {
+        var val = $(this).val();
+        if(val==='female'){
+            $('#female_sex_extra').removeAttr('disabled');
+        }else{
+            $('#female_sex_extra')
+                .val('')
+                .attr('disabled', 'disabled');
+            $('#num_puppies')
+                .attr('disabled', 'disabled')
+                .val('')
+        }
+    }).trigger('change');
+
+    $('#female_sex_extra').change(function(event) {
+        var val = $(this).val();
+        if(val==='spayed'){
+            $('#num_puppies')
+                .attr('disabled', 'disabled')
+                .val('')
+        }else{
+            $('#num_puppies').removeAttr('disabled')
+        }
+    });
+
 });

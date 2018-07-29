@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', is_null($resourceData->id) ? 'New Pet Registration' : 'Update Pet Registration')
+@section('title', is_null($resourceData->id) ? 'New Impound Request' : 'Update Impound Request List')
 
 @section('content')
 
@@ -24,7 +24,7 @@
             <div class="col-sm-7">
                 <div class="form-row">
                     <div class="col-sm-6">
-                        {!! Form::inputGroup('date', 'Date Seized', 'date_seized') !!}
+                        {!! Form::inputGroup('date', 'Date Seized', 'date_seized', null, ['max' => now()->format('Y-m-d')]) !!}
                     </div>
                     <div class="col-sm-6">
                         {!! Form::inputGroup('text', 'Cage Number', 'cage_number') !!}
@@ -53,7 +53,7 @@
                 {!! Form::selectGroup('Habitat', 'habitat', ['' => '*SELECT*', 'caged' => 'Caged', 'leashed' => 'Leashed', 'roaming' => 'Roaming', 'house_only' => 'House Only']) !!}
             </div>
             <div class="col-sm-3">
-                {!! Form::inputGroup('date', 'Birthdate', 'birthdate') !!}
+                {!! Form::inputGroup('date', 'Birthdate', 'birthdate', null, ['max' => now()->format('Y-m-d')]) !!}
             </div>
             <div class="col-sm-3">
                 {!! Form::inputGroup('text', 'Color', 'color') !!}
@@ -86,7 +86,7 @@
         <hr>
         <div class="form-row">
             <div class="col-sm-3">
-                {!! Form::inputGroup('date', 'Date Vaccinated', 'date_vaccinated') !!}
+                {!! Form::inputGroup('date', 'Date Vaccinated', 'date_vaccinated', null, ['max' => now()->format('Y-m-d')]) !!}
             </div>
             <div class="col-sm-4">
                 {!! Form::inputGroup('text', 'Vaccinated by', 'vaccinated_by') !!}

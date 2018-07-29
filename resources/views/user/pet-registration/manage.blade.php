@@ -5,10 +5,10 @@
 <div class="card">
     <div class="card-body">
         @if(is_null($resourceData->id))
-            <h4 class="card-title">Pet Registration</h4>
+            <h4 class="card-title">Impound Request Form</h4>
             {!! Form::open(['url' => MyHelper::resource('store'), 'method' => 'POST', 'files' => true, 'class' => 'ajax', 'data-next-url' => route('user.pet-registration.index')]) !!}
         @else
-            <h4 class="card-title">Update Pet Registration</h4>
+            <h4 class="card-title">Impound Request Form</h4>
             {!! Form::model($resourceData, ['url' => MyHelper::resource('update', ['id' => $resourceData->id]), 'method' => 'PATCH', 'files' => true, 'class' => 'ajax', 'data-next-url' => route('user.pet-registration.index')]) !!}
         @endif
         {!! Form::textareaGroup('Reason for impounding', 'reason', null, ['rows' => 3]) !!}

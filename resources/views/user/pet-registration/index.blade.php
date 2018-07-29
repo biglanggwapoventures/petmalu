@@ -9,7 +9,7 @@
 @endif
 <div class="card">
     <div class="card-body mb-0">
-        <h4 class="card-title">Pet Registration History</h4>
+        <h4 class="card-title">Impound History</h4>
     </div>
     <div class="card-body p-0">
         <table class="table mt-0">

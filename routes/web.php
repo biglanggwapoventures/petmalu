@@ -36,3 +36,5 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middl
     Route::resource('adoption-request', 'AdoptionRequestController');
     Route::post('cancel-adoption-request', 'CancelAdoptionRequestController')->name('adoption-request.cancel');
 });
+
+Route::post('update-profile', 'ProfileController')->name('profile.update')->middleware('auth');

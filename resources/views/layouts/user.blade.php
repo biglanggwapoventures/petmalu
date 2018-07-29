@@ -45,8 +45,12 @@
                 Hello, {{ auth()->user()->name }}!
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
+                <a class="dropdown-item" data-toggle="modal" data-target="#profile-modal"><i class="fa fa-user fa-fw"></i> Profile</a>
+
+                @if(auth()->user()->is('admin'))
                 <a class="dropdown-item" href="{{ route('admin.pet-registration.index') }}"><i class="fa fa-diamond fa-fw"></i> Admin Page</a>
+                @endif
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item logout" href="#" class=""><i class="fa fa-sign-out fa-fw"></i> Log me out</a>
                 {!! Form::open(['url' => url('logout'), 'method' => 'POST', 'id' => 'logout-form']) !!}
@@ -70,28 +74,40 @@
 
     <div class="container pt-3">
       @if(!isset($hidePageHeader))
-      <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-3">
+            <div class="col">
+                <h4 class="mb-0">@yield('title')</h4>
+            </div>
+            <div class="col text-right">
+                 @if(MyHelper::resourceMethodIn(['create', 'edit']))
+                    <a href="{{ MyHelper::resource('index') }}" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Back to list</a>
+                  @elseif(MyHelper::resourceMethodIn(['index']))
+                    <a href="{{ MyHelper::resource('create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New entry</a>
+                  @endif
+            </div>
+        </div>
+      @endif
+      @if($flash = session('message'))
+        <div class="row">
           <div class="col">
-              <h4 class="mb-0">@yield('title')</h4>
+            <div class="alert alert-{{ $flash['status'] }}">
+                {{ $flash['message'] }}
+            </div>
           </div>
-          <div class="col text-right">
-               @if(MyHelper::resourceMethodIn(['create', 'edit']))
-                  <a href="{{ MyHelper::resource('index') }}" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Back to list</a>
-                @elseif(MyHelper::resourceMethodIn(['index']))
-                  <a href="{{ MyHelper::resource('create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New entry</a>
-                @endif
-          </div>
-      </div>
+        </div>
       @endif
       @yield('content')
 
   </div>
-    <!-- Modal -->
+    <!-- Modals -->
     @includeWhen(auth::guest(), 'partials.registration-modal')
     @includeWhen(auth::guest(), 'partials.login-modal')
+    @includeWhen(auth::check(), 'partials.profile-modal')
+    @stack('modals')
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('js')
-@stack('modals')
+
+
 </body>
 </html>
