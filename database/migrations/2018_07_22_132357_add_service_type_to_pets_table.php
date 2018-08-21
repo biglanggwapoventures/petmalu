@@ -14,7 +14,7 @@ class AddServiceTypeToPetsTable extends Migration
     public function up()
     {
         Schema::table('pets', function (Blueprint $table) {
-            $table->enum('service_type', ['deliver', 'pickup'])->default('pickup')->after('registration_status');
+            $table->enum('service_type', ['deliver', 'pickup', 'stray'])->default('stray')->after('registration_status');
         });
     }
 
