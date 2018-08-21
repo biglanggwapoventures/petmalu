@@ -8,6 +8,11 @@ class PetRegistrationController extends UserPetRegistrationController
 {
     public function beforeIndex($query)
     {
+        $registrationStatus = $this->request->registration_status;
+        $query->when(in_array($registrationStatus, ['pending', 'approved', 'rejected']), function ($q) use ($registrationStatus) {
+            $q->whereRegistrationStatus($registrationStatus);
+        });
+
         $query->with('owner');
     }
 
@@ -26,5 +31,10 @@ class PetRegistrationController extends UserPetRegistrationController
         $validationArray['cage_number'] = 'nullable|required_if:registration_status,approved|string|max:15';
 
         return $validationArray;
+    }
+
+    public function beforeEdit($model)
+    {
+        $model->load('approvedAdoptionRequest');
     }
 }

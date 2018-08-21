@@ -10,6 +10,11 @@
         @else
             {!! Form::model($resourceData, ['url' => MyHelper::resource('update', ['id' => $resourceData->id]), 'method' => 'PATCH', 'files' => true, 'class' => 'ajax', 'data-next-url' => MyHelper::resource('index')]) !!}
         @endif
+        @if($resourceData->approvedAdoptionRequest)
+            <div class="alert alert-warning">
+                <i class="fa fa-info-circle"></i> Editing is disabled because this pet is already adopted.
+            </div>
+        @endif
         @if($resourceData->id)
             <div class="alert alert-info" role="alert">
               <h4 class="alert-heading">Reason for impound</h4>
@@ -153,5 +158,17 @@
             $('[name=origin_longitude]').val(place.geometry.location.lng())
         });
     }
+</script>
+<script>
+    $(document).ready(function() {
+        var isAdopted = {{ (bool)$resourceData->approvedAdoptionRequest }};
+        if(isAdopted){
+            $('select,input,textarea,[type=submit]')
+                .attr('disabled', 'disabled')
+                .css({
+                    'border': 0
+                })
+        }
+    });
 </script>
 @endpush

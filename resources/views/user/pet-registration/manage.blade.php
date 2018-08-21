@@ -172,3 +172,18 @@
   </div>
 </div>
 @endpush
+
+@push('js')
+<script>
+    $(document).ready(function() {
+        var status = "{{ $resourceData->registration_status }}";
+        if(status === 'approved' || status === 'rejected'){
+            $('select,input,textarea,[type=submit]')
+                .attr('disabled', 'disabled')
+                .css({
+                    'border': 0
+                })
+        }
+    });
+</script>
+@endpush

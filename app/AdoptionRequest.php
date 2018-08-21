@@ -16,6 +16,11 @@ class AdoptionRequest extends Model
         'user_id',
         'request_status',
         'adoption_purpose',
+        'proof_of_adoption',
+    ];
+
+    protected $appends = [
+        'proof_of_adoption_filepath',
     ];
 
     protected $dates = [
@@ -29,7 +34,9 @@ class AdoptionRequest extends Model
 
     public function scopeFieldsForMasterList($query)
     {
-        return $query;
+        return $query->whereHas('pet', function ($q) {
+            $q->whereRegistrationStatus('approved');
+        });
     }
 
     public function pet()
@@ -46,5 +53,10 @@ class AdoptionRequest extends Model
     {
         $message = new SMS($this->requestor->mobile_number, 'Hello, please go to the pound');
         return $message->send();
+    }
+
+    public function getProofOfAdoptionFilepathAttribute()
+    {
+        return asset("storage/{$this->proof_of_adoption}");
     }
 }

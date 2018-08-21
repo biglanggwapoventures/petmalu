@@ -48,9 +48,9 @@ class PetRegistrationController extends BaseController
 
     protected function validationArray()
     {
-        return [
+        $rules = [
             'reason' => 'required',
-            'photo' => 'nullable|image|max:3072',
+            'photo' => ['required', 'image', 'max:3072'],
             'ownership' => ['required', Rule::in(['household', 'community'])],
             'habitat' => ['required', Rule::in(['caged', 'leashed', 'roaming', 'house_only'])],
             'species' => ['required', Rule::in(['dog', 'cat', 'others'])],
@@ -74,6 +74,12 @@ class PetRegistrationController extends BaseController
             'routine_service_remarks' => 'nullable|string',
             'service_type' => 'required|in:pickup,deliver',
         ];
+
+        if ($this->request->isMethod('patch')) {
+            $rules['photo'][0] = 'nullable';
+        }
+
+        return $rules;
     }
 
     /**

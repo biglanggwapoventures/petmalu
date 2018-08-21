@@ -7,6 +7,17 @@
     {{ $error }}
 </div>
 @endif
+<form class="form-inline">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="" class="mr-1">Show only</label>
+    {!! Form::plainSelect(
+        'registration_status',
+        ['' => '*ALL*', 'pending' => 'Pending Requests', 'approved' => 'Approved Requests', 'rejected' => 'Rejected Requests'],
+        request()->registration_status,
+        ['class' => 'custom-select']) !!}
+  </div>
+  <button type="submit" class="btn btn-info mb-2"><i class="fa fa-search"></i> Filter</button>
+</form>
 <table class="table mt-0 table-hover">
     <thead>
         <tr>
@@ -15,7 +26,7 @@
             <th>Breed</th>
             <th>Date Registered</th>
             <th>Owner</th>
-            <th>Notes</th>
+            <th class="text-center">Notes</th>
             <th>Status</th>
             <th></th>
         </tr>
@@ -28,7 +39,9 @@
             <td>{{ $row->breed ?: '-' }}</td>
             <td>{{ $row->created_at->format('m/d/Y h:i A') }}</td>
             <td>{{ $row->owner->name }}</td>
-            <td>{!! $row->service_type === 'pickup' ? '<span class="badge badge-warning">Pick up at location</span>' : '<span class="badge badge-success">To be surrendered</span>' !!}</td>
+            <td class="text-uppercase text-center">
+                <span class="badge badge-primary">{{ $row->notes }}</span>
+            </td>
             <td>{{ ucfirst($row->registration_status) }}</td>
             <td>
                 <a href="{{ route('admin.pet-registration.edit', $row->id) }}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit</a>
@@ -41,7 +54,9 @@
         </tr>
         @empty
         <tr>
-            <td colspan="6" class="text-center text-info">No pet registered</td>
+            <td colspan="8" class="text-center text-info">
+                {{ request()->registration_status ? 'No data matched with filter' : 'No pets registered' }}
+            </td>
         </tr>
         @endforelse
     </tbody>

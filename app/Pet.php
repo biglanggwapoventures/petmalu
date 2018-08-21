@@ -16,6 +16,7 @@ class Pet extends Model
 
     protected $appends = [
         'photo_filepath',
+        'notes',
     ];
 
     protected $hidden = [
@@ -128,6 +129,18 @@ class Pet extends Model
     public function is($status)
     {
         return $this->registration_status === strtolower($status);
+    }
+
+    public function getNotesAttribute()
+    {
+        switch ($this->service_type) {
+            case 'stray':
+                return 'Stray';
+            case 'pickup':
+                return 'Pickup at location';
+            default:
+                return 'To be surrendered';
+        }
     }
 
 }

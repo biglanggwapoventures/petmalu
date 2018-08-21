@@ -28,7 +28,7 @@ class CancelAdoptionRequestController extends Controller
             return redirect()
                 ->route('user.adoption-request.index')
                 ->withMessage([
-                    'state' => 'danger',
+                    'status' => 'danger',
                     'message' => 'Cannot cancel approved requests.',
                 ]);
         }
@@ -39,7 +39,7 @@ class CancelAdoptionRequestController extends Controller
         return redirect()
             ->route('user.adoption-request.index')
             ->withMessage([
-                'state' => 'success',
+                'status' => 'success',
                 'message' => 'Adoption request has been cancelled.',
             ]);
     }

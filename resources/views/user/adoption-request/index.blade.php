@@ -1,12 +1,6 @@
 @extends('layouts.user', ['hidePageHeader' => true])
 
 @section('content')
-
-@if($flash = session('message'))
-<div class="alert alert-{{ $flash['state'] }}">
-    {{ $flash['message'] }}
-</div>
-@endif
 <div class="card">
     <div class="card-body mb-0">
         <h4 class="card-title">Pet Adoption Requests</h4>
