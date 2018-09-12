@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $('.modal').on('show.bs.modal', function() {
+    $('.modal:not(.no-reset)').on('show.bs.modal', function() {
         var form = $(this).find('form');
         if(!form.length){
             return;

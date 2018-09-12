@@ -10,7 +10,7 @@ class AdoptedPetsController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $data = Pet::adopted()->profile()->get();
+        $data = Pet::adopted($request->start_date, $request->end_date)->profile()->get();
 
         return view('admin.adopted-pets', [
             'data' => $data,

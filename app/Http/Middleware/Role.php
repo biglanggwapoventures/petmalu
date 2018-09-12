@@ -16,12 +16,14 @@ class Role
      */
     public function handle($request, Closure $next, string...$roles)
     {
+        if (Auth::guest()) {
+            return redirect('/');
+        }
+
         $user = Auth::user();
 
         if (in_array($user->role, $roles)) {
             return $next($request);
         }
-
-        return redirect('/');
     }
 }

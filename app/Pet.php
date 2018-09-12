@@ -73,14 +73,19 @@ class Pet extends Model
             ->whereDoesntHave('approvedAdoptionRequest');
     }
 
-    public function scopeAdopted($query)
+    public function scopeAdopted($query, $startDate = false, $endDate = false)
     {
-        return $query->whereHas('approvedAdoptionRequest')
-            ->with([
-                'owner:id,name',
-                'approvedAdoptionRequest:id,pet_id,user_id,adoption_purpose,adopted_at,proof_of_adoption',
-                'approvedAdoptionRequest.requestor:id,name',
-            ]);
+        return $query->whereHas('approvedAdoptionRequest', function ($q) use ($startDate, $endDate) {
+            $q->when($startDate, function ($then) use ($startDate) {
+                $then->where('adopted_at', '>=', $startDate);
+            })->when($endDate, function ($then) use ($endDate) {
+                $then->where('adopted_at', '<=', $endDate);
+            });
+        })->with([
+            'owner:id,name,email,mobile_number,gender,address',
+            'approvedAdoptionRequest:id,pet_id,user_id,adoption_purpose,adopted_at,proof_of_adoption',
+            'approvedAdoptionRequest.requestor:id,name,email,mobile_number,gender,address',
+        ]);
     }
 
     public function loadAdoptionDetails()

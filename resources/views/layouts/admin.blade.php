@@ -30,11 +30,22 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.adoption-request.index') }}">Adoption Requests </a>
           </li>
-          <li class="nav-item">
+         {{--  <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.adopted-pets.index') }}">Adopted Pets </a>
+          </li> --}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Reports
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ route('admin.adopted-pets.index') }}">
+                <i class="fa fa-chevron-right"></i> Adopted Pets
+              </a>
+              <a class="dropdown-item" href="{{ url('/') }}"><i class="fa fa-chevron-right"></i> Impounded Pets</a>
+            </div>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="{{ route('admin.users.index') }}" class="nav-link"><i class="fa fa-users"></i> Manage Users</a></li>
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-user"></i> Admin
@@ -64,6 +75,8 @@
         @elseif(MyHelper::resourceMethodIn(['index']))
           @if(!isset($hideNewEntryLink))
             <a href="{{ MyHelper::resource('create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New entry</a>
+          @else
+            @yield('new-entry-link')
           @endif
         @endif
       </div>
@@ -74,6 +87,8 @@
   </main>
 
 <!-- Scripts -->
+@stack('modals')
+
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('js')
 </body>

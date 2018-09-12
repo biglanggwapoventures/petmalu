@@ -97,7 +97,9 @@
 
               @forelse($pet->adoptionRequests as $item)
               <tr class="{{ optional($pet->approvedAdoptionRequest)->id === $item->id ? 'bg-success text-white' : '' }}">
-              <td>{{ $item->requestor->name }}</td>
+              <td>
+                <a href="javascript:void(0)" class="peeks-profile" data-profile="{{ $item->requestor->toJson() }}">{{ $item->requestor->name }}</a>
+              </td>
               <td>{{ $item->adoption_purpose }}</td>
               <td>{{ date_create($item->created_at)->format('M d, Y h:i A') }}</td>
               <td>
@@ -146,6 +148,8 @@
   </div>
 </div>
 @endsection
+
+@include('partials.profile-peek')
 
 @push('js')
 @endpush

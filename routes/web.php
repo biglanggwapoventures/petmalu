@@ -12,6 +12,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'role:admin'], function () {
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
+    Route::resource('users', 'UsersController');
     Route::get('adopted-pets', 'AdoptedPetsController')->name('adopted-pets.index');
     Route::get('adopted-pets/{pet}', 'AdoptedPetsController@show')->name('adopted-pets.show');
 
@@ -21,6 +22,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
     });
 
     Route::post('adoption-request/{adoptionRequest}/send-notification', 'AdoptionRequestNotificationController')->name('adoption-request-notification');
+
+    Route::patch('users/{user}/disable', 'DisabledUsersConroller@store');
+    Route::patch('users/{user}/enable', 'DisabledUsersConroller@destroy');
 
     // Route::get('report', 'ReportsController');
     Route::group(['prefix' => 'reports'], function () {

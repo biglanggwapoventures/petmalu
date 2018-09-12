@@ -9,6 +9,7 @@ class PetRegistrationController extends UserPetRegistrationController
     public function beforeIndex($query)
     {
         $registrationStatus = $this->request->registration_status;
+
         $query->when(in_array($registrationStatus, ['pending', 'approved', 'rejected']), function ($q) use ($registrationStatus) {
             $q->whereRegistrationStatus($registrationStatus);
         });
