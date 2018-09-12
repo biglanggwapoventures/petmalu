@@ -2,23 +2,26 @@
 @section('title', "Reports: Impounded Pets")
 
 
-@section('content')
-<div class="row align-items-center">
-  <div class="col-sm-9">
+@section('content')<div class="row align-items-center">
+  <div class="col-sm-10">
     <form class="form-inline">
+        <div class="form-group mr-sm-3 mb-2">
+          <label for="" class="mr-1">Pet Name</label>
+          {!! Form::plainInput('text', 'pet_name', request()->pet_name, ['class' => 'form-control']) !!}
+        </div>
         <div class="form-group mr-sm-3 mb-2">
           <label for="" class="mr-1">Start Date</label>
           {!! Form::plainInput('date', 'start_date', request()->start_date, ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group mr-sm-3 mb-2">
+        <div class="form-group mr-sm-1 mb-2">
           <label for="" class="mr-1">End Date</label>
           {!! Form::plainInput('date', 'end_date', request()->end_date, ['class' => 'form-control']) !!}
         </div>
-        <button type="submit" class="btn btn-info mb-2"><i class="fa fa-search"></i> Filter</button>
+        <button type="submit" class="btn btn-info mb-2"><i class="fa fa-search"></i></button>
       </form>
   </div>
-  <div class="col-sm-3 text-right">
-    <h4>Total Count: <span class="badge badge-info">{{ $data->count() }}</span></h4>
+  <div class="col-sm-2 text-right">
+    <h4>Count: <span class="badge badge-info">{{ $data->count() }}</span></h4>
   </div>
 </div>
 <table class="table mt-0 table-hover">

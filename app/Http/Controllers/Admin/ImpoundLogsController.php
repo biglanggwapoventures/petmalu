@@ -10,7 +10,12 @@ class ImpoundLogsController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $data = Pet::impounded($request->start_date, $request->end_date)->profile()->get();
+        $data = Pet::when($request->pet_name, function ($q) use ($request) {
+            $q->where('pet_name', 'like', "%{$request->pet_name}%");
+        })->impounded(
+            $request->start_date,
+            $request->end_date
+        )->profile()->get();
 
         return view('admin.impounded-pets', [
             'data' => $data,

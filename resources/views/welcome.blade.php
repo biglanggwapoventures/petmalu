@@ -22,9 +22,10 @@
 
       <!-- Call to Action Well -->
       <h4 class="pb-2 border-bottom mb-3">Pets for Adoption</h4>
+      @include('partials.search-bar', ['registrationStatus' => false])
 
       <!-- Content Row -->
-      <div class="row">
+      <div class="row mt-3">
         @foreach($items as $item)
           <div class="col-sm-3">
             <div class="card">
