@@ -13,8 +13,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
     Route::resource('pet-registration', 'PetRegistrationController');
     Route::resource('adoption-request', 'AdoptionRequestController');
     Route::resource('users', 'UsersController');
+
+    // adopted pets report
     Route::get('adopted-pets', 'AdoptedPetsController')->name('adopted-pets.index');
     Route::get('adopted-pets/{pet}', 'AdoptedPetsController@show')->name('adopted-pets.show');
+
+    //impound pets report
+    Route::get('impounded-pets', 'ImpoundLogsController')->name('impounded-pets.index');
 
     Route::group(['prefix' => 'pet/{pet}/manage-adoption-requests', 'as' => 'pet-adoption-requests.'], function () {
         Route::get('/', 'ManagePetAdoptionRequestsController@index')->name('index');
@@ -25,12 +30,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
 
     Route::patch('users/{user}/disable', 'DisabledUsersConroller@store');
     Route::patch('users/{user}/enable', 'DisabledUsersConroller@destroy');
-
-    // Route::get('report', 'ReportsController');
-    Route::group(['prefix' => 'reports'], function () {
-        // Route::get('impound-logs', 'ImpoundLogsController')
-        // Route::get('adoptions-logs', 'AdoptionLogsController')
-    });
 
 });
 

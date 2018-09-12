@@ -3,6 +3,7 @@
 
 
 @section('content')
+@include('partials.search-bar', ['registrationStatus' => false])
 <div class="row">
     @foreach($resourceList as $item)
       <div class="col-sm-3">

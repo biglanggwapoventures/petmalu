@@ -15,13 +15,24 @@ class AdoptionRequestController extends UserAdoptionRequestController
      */
     public function index()
     {
-        $result = Pet::profile()
+        $query = Pet::profile()
             ->forAdoption()
             ->has('adoptionRequests', '>=', 1)
-            ->withCount('adoptionRequests')
-            ->get();
+            ->withCount('adoptionRequests');
 
-        $this->viewData['resourceList'] = $result;
+        $query->when($this->request->species, function ($q) {
+            $q->where('species', 'like', "%{$this->request->species}%");
+        });
+
+        $query->when($this->request->breed, function ($q) {
+            $q->where('breed', 'like', "%{$this->request->breed}%");
+        });
+
+        $query->when($this->request->name, function ($q) {
+            $q->where('pet_name', 'like', "%{$this->request->name}%");
+        });
+
+        $this->viewData['resourceList'] = $query->get();
 
         return view(
             "{$this->viewBaseDir}.{$this->viewFiles['index']}",

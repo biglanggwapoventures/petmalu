@@ -88,6 +88,23 @@ class Pet extends Model
         ]);
     }
 
+    public function scopeImpounded($query, $startDate = false, $endDate = false)
+    {
+        return $query->where('registration_status', 'approved')
+            ->when($startDate, function ($then) use ($startDate) {
+                $then->where('created_at', '>=', $startDate);
+            })->when($endDate, function ($then) use ($endDate) {
+            $then->where('created_at', '<=', $endDate);
+        })->with([
+            'owner:id,name,email,mobile_number,gender,address',
+        ]);
+    }
+
+    public function scopePendingImpound($query)
+    {
+        return $query->where('registration_status', '!=', 'approved');
+    }
+
     public function loadAdoptionDetails()
     {
         return $this->load([
@@ -119,7 +136,7 @@ class Pet extends Model
 
     public function scopeProfile($query)
     {
-        $query->select('id', 'pet_name', 'breed', 'species', 'origin', 'origin_latitude', 'origin_longitude', 'ownership', 'habitat', 'color', 'photo', 'created_by');
+        $query->select('id', 'pet_name', 'breed', 'species', 'origin', 'origin_latitude', 'origin_longitude', 'ownership', 'habitat', 'color', 'photo', 'created_by', 'created_at');
     }
 
     public function isAdopted()

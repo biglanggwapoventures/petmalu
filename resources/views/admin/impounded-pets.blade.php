@@ -1,13 +1,26 @@
-@extends('layouts.admin')
-@section('title', 'Impound Request List')
+@extends('layouts.admin', ['hideNewEntryLink' => true])
+@section('title', "Reports: Impounded Pets")
+
 
 @section('content')
-@if($error = session('deletionError'))
-<div class="alert alert-danger">
-    {{ $error }}
+<div class="row align-items-center">
+  <div class="col-sm-9">
+    <form class="form-inline">
+        <div class="form-group mr-sm-3 mb-2">
+          <label for="" class="mr-1">Start Date</label>
+          {!! Form::plainInput('date', 'start_date', request()->start_date, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group mr-sm-3 mb-2">
+          <label for="" class="mr-1">End Date</label>
+          {!! Form::plainInput('date', 'end_date', request()->end_date, ['class' => 'form-control']) !!}
+        </div>
+        <button type="submit" class="btn btn-info mb-2"><i class="fa fa-search"></i> Filter</button>
+      </form>
+  </div>
+  <div class="col-sm-3 text-right">
+    <h4>Total Count: <span class="badge badge-info">{{ $data->count() }}</span></h4>
+  </div>
 </div>
-@endif
-@include('partials.search-bar')
 <table class="table mt-0 table-hover">
     <thead>
         <tr>
@@ -16,13 +29,11 @@
             <th>Breed</th>
             <th>Date Registered</th>
             <th>Owner</th>
-            <th class="text-center">Notes</th>
-            <th>Status</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @forelse($resourceList as $row)
+        @forelse($data as $row)
         <tr>
             <td>{{ $row->pet_name }}</td>
             <td>{{ ucfirst($row->species) }}</td>
@@ -33,17 +44,8 @@
                     {{ $row->owner->name }}
                 </a>
             </td>
-            <td class="text-uppercase text-center">
-                <span class="badge badge-primary">{{ $row->notes }}</span>
-            </td>
-            <td>{{ ucfirst($row->registration_status) }}</td>
             <td>
                 <a href="{{ route('admin.pet-registration.edit', $row->id) }}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit</a>
-                <a class="trash-row btn btn-sm btn-danger" href="#">
-                    <i class="fa fa-trash"></i> Trash
-                    {!! Form::open(['url'=> MyHelper::resource('destroy', $row->id), 'method'=> 'DELETE','class'=> 'hidden']) !!}
-                    {!! Form::close()!!}
-                </a>
             </td>
         </tr>
         @empty
@@ -57,6 +59,5 @@
 </table>
 
 @endsection
-
 
 @include('partials.profile-peek')

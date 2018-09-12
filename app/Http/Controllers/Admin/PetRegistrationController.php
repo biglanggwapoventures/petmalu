@@ -14,7 +14,19 @@ class PetRegistrationController extends UserPetRegistrationController
             $q->whereRegistrationStatus($registrationStatus);
         });
 
-        $query->with('owner');
+        $query->when($this->request->species, function ($q) {
+            $q->where('species', 'like', "%{$this->request->species}%");
+        });
+
+        $query->when($this->request->breed, function ($q) {
+            $q->where('breed', 'like', "%{$this->request->breed}%");
+        });
+
+        $query->when($this->request->name, function ($q) {
+            $q->where('pet_name', 'like', "%{$this->request->name}%");
+        });
+
+        $query->pendingImpound()->with('owner');
     }
 
     protected function validationArray()

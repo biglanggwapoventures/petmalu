@@ -30,9 +30,6 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.adoption-request.index') }}">Adoption Requests </a>
           </li>
-         {{--  <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.adopted-pets.index') }}">Adopted Pets </a>
-          </li> --}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Reports
             </a>
@@ -40,7 +37,9 @@
               <a class="dropdown-item" href="{{ route('admin.adopted-pets.index') }}">
                 <i class="fa fa-chevron-right"></i> Adopted Pets
               </a>
-              <a class="dropdown-item" href="{{ url('/') }}"><i class="fa fa-chevron-right"></i> Impounded Pets</a>
+              <a class="dropdown-item" href="{{ route('admin.impounded-pets.index') }}">
+                <i class="fa fa-chevron-right"></i> Impounded Pets
+              </a>
             </div>
           </li>
         </ul>
