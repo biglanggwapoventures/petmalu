@@ -15,12 +15,14 @@
                 <i class="fa fa-info-circle"></i> Editing is disabled because this pet is already adopted.
             </div>
         @endif
-        @if($resourceData->id)
+       {{--  @if($resourceData->id)
             <div class="alert alert-info" role="alert">
               <h4 class="alert-heading">Reason for impound</h4>
               <p class="mb-0">{!! $resourceData->reason ?: '<em>No reason specified</em>' !!}</p>
             </div>
-        @endif
+        @endif --}}
+        {!! Form::textAreaGroup('Story', 'story', null, ['rows' => 5]) !!}
+
         <div class="form-row">
 
             <div class="col-sm-5">
@@ -77,6 +79,8 @@
             </div>
         </div>
         <hr>
+
+
         <div class="form-group">
             <label class="d-block">Upload photo</label>
             <input type="file" name="photo" class="form-control border-0 p-0" />
