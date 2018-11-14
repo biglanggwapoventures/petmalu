@@ -43,7 +43,7 @@ class AdoptionRequestController extends BaseController
 
     public function beforeIndex($query)
     {
-        $query->whereUserId(Auth::id())->with('pet');
+        $query->latest()->whereUserId(Auth::id())->with('pet');
     }
 
     protected function validationArray()

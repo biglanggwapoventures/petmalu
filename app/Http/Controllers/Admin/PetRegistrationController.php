@@ -26,7 +26,7 @@ class PetRegistrationController extends UserPetRegistrationController
             $q->where('pet_name', 'like', "%{$this->request->name}%");
         });
 
-        $query->pendingImpound()->with('owner');
+        $query->latest()->forAdoption()->with('owner');
     }
 
     protected function validationArray()
@@ -40,7 +40,7 @@ class PetRegistrationController extends UserPetRegistrationController
         $validationArray['origin_longitude'] = 'nullable|numeric';
         $validationArray['registration_status'] = 'required|in:pending,approved,rejected';
 
-        $validationArray['date_seized'] = 'nullable|required_if:registration_status,approved|date';
+        // $validationArray['date_seized'] = 'nullable|required_if:registration_status,approved|date';
         $validationArray['cage_number'] = 'nullable|required_if:registration_status,approved|string|max:15';
 
         return $validationArray;

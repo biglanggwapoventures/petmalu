@@ -15,7 +15,7 @@ class ImpoundLogsController extends Controller
         })->impounded(
             $request->start_date,
             $request->end_date
-        )->profile()->get();
+        )->profile()->latest()->get();
 
         return view('admin.impounded-pets', [
             'data' => $data,

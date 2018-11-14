@@ -132,7 +132,7 @@
             <div class="col-6">
               <div class="form-group">
                 <div class="form-group">
-                  <label for="">Attach image</label>
+                  <label for="">New owner image</label>
                   <input type="file" name="photo" class="form-control pl-0" style="border:0">
                 </div>
               </div>

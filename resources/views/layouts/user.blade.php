@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           @auth
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Impound Requests
               </a>
@@ -34,7 +34,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('user.pet-registration.create') }}">New Request</a>
               </div>
-            </li>
+            </li> --}}
           <li class="nav-item"><a href="{{ route('user.adoption-request.index') }}" class="nav-link">Adoption Requests</a></li>
           </ul>
           @endauth

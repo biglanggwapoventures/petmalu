@@ -15,7 +15,7 @@ class AdoptedPetsController extends Controller
         })->adopted(
             $request->start_date,
             $request->end_date
-        )->profile()->get();
+        )->profile()->latest()->get();
 
         return view('admin.adopted-pets', [
             'data' => $data,

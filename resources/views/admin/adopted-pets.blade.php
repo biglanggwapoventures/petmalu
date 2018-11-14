@@ -1,6 +1,10 @@
 @extends('layouts.admin', ['hideNewEntryLink' => true])
 @section('title', "Reports: Adopted Pets")
-
+<style type="text/css">
+    .table td{
+        vertical-align:middle!important;
+    }
+</style>
 
 @section('content')
 <div class="row align-items-center">
@@ -28,6 +32,7 @@
 <table class="table mt-2 table-hover">
     <thead>
         <tr>
+            <th></th>
             <th>Pet</th>
             <th>Past Owner</th>
             <th>New Owner</th>
@@ -38,6 +43,7 @@
     <tbody>
       @forelse($data as $row)
         <tr>
+          <td><img src="{{ $row->photo_filepath }}" class="rounded" style="height:60px;width:60px;"></td>
           <td>
             <strong>{{ $row->pet_name }}</strong>
             <br>

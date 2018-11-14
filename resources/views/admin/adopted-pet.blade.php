@@ -61,37 +61,6 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-header text-center">
-            Past Owner Profile
-          </div>
-            <table class="table  table-hover mb-0">
-              <tbody>
-                  <tr>
-                      <td><strong>Name</strong></td>
-                      <td>{{ $pet->owner->name }} ({{ ucfirst($pet->owner->gender) }})</td>
-                  </tr>
-                  <tr>
-                      <td><strong>Address</strong></td>
-                      <td>{{ ucfirst($pet->owner->address) }}</td>
-                  </tr>
-                  <tr>
-                      <td><strong>Civil Status</strong></td>
-                      <td>{{ ucfirst($pet->owner->civil_status) }}</td>
-                  </tr>
-                  <tr>
-                      <td><strong>Birthdate</strong></td>
-                      <td>{{ date_create($pet->owner->birthdate)->format('M d, Y') }}</td>
-                  </tr>
-                  <tr>
-                      <td><strong>Reason for impound</strong></td>
-                      <td>{{ $pet->reason }}</td>
-                  </tr>
-              </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-header text-center">
             New Owner Profile
           </div>
             <table class="table  table-hover mb-0">
@@ -112,19 +81,17 @@
                       <td><strong>Birthdate</strong></td>
                       <td>{{ date_create(data_get($pet, 'approvedAdoptionRequest.requestor.birthdate'))->format('M d, Y') }}</td>
                   </tr>
-                  <tr>
-                      <td><strong>Purpose for adoption</strong></td>
-                      <td>{{ data_get($pet, 'approvedAdoptionRequest.adoption_purpose') }}</td>
-                  </tr>
               </tbody>
           </table>
         </div>
       </div>
-    </div>
-    <div class="card text-white mt-3">
-      <img class="card-img" src="{{ data_get($pet, 'approvedAdoptionRequest.proof_of_adoption_filepath') }}" alt="Card image">
-      <div class="card-img-overlay">
-        <h5 class="card-title text-uppercase">Proof of adoption</h5>
+      <div class="col-sm-6">
+        <div class="card text-white">
+          <img class="card-img" src="{{ data_get($pet, 'approvedAdoptionRequest.proof_of_adoption_filepath') }}" alt="Card image">
+          <div class="card-img-overlay">
+            <h5 class="card-title text-uppercase">Proof of adoption</h5>
+          </div>
+        </div>
       </div>
     </div>
   </div>

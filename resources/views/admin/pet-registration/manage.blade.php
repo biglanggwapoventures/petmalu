@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', is_null($resourceData->id) ? 'New Impound Request' : 'Update Impound Request List')
+@section('title', is_null($resourceData->id) ? 'New Animal' : 'Update Animal')
 
 @section('content')
 
@@ -28,9 +28,9 @@
             </div>
             <div class="col-sm-7">
                 <div class="form-row">
-                    <div class="col-sm-6">
+                    {{-- <div class="col-sm-6">
                         {!! Form::inputGroup('date', 'Date Seized', 'date_seized', null, ['max' => now()->format('Y-m-d')]) !!}
-                    </div>
+                    </div> --}}
                     <div class="col-sm-6">
                         {!! Form::inputGroup('text', 'Cage Number', 'cage_number') !!}
                     </div>
@@ -77,64 +77,12 @@
             </div>
         </div>
         <hr>
-        <div class="form-row">
-            <div class="col-sm-4">
-                {!! Form::selectGroup('Contact with other animals', 'other_animal_contact', ['' => '*SELECT*', 'frequent' => 'Frequent', 'seldom' => 'Seldom', 'never' => 'Never']) !!}
-            </div>
-            <div class="col-sm-2">
-                {!! Form::selectGroup('Tag', 'tag', ['' => '*SELECT*', 'collar' => 'Collar', 'microchip' => 'Microchip', 'tattoo_code' => 'Tattoo Code', 'others' => 'Others']) !!}
-            </div>
-            <div class="col-sm-4">
-                {!! Form::inputGroup('text', ".. if others", 'other_tag_extra') !!}
-            </div>
-        </div>
-        <hr>
-        <div class="form-row">
-            <div class="col-sm-3">
-                {!! Form::inputGroup('date', 'Date Vaccinated', 'date_vaccinated', null, ['max' => now()->format('Y-m-d')]) !!}
-            </div>
-            <div class="col-sm-4">
-                {!! Form::inputGroup('text', 'Vaccinated by', 'vaccinated_by') !!}
-            </div>
-            <div class="col-sm-2">
-                {!! Form::selectGroup('Vaccination Source', 'vaccination_source', ['' => '*SELECT*'] +  array_combine(['BAI', 'DARFO', 'PLGU', 'MLGU', 'DOH', 'NGO', 'OIE'], ['BAI', 'DARFO', 'PLGU', 'MLGU', 'DOH', 'NGO', 'OIE'])) !!}
-            </div>
-            <div class="col-sm-3">
-                {!! Form::inputGroup('text', 'Vaccinate Stock #', 'vaccine_stock_number') !!}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-sm-3">
-                {!! Form::selectGroup('Vaccination Type', 'vaccination_type', ['' => '*SELECT*', 'anti_rabies' => 'Anti Rabbies', 'others' => 'Others']) !!}
-            </div>
-            <div class="col-sm-6">
-                {!! Form::inputGroup('text', 'Vaccination Remarks', 'vaccination_remarks') !!}
-            </div>
-        </div>
-        <hr>
-        <div class="form-row">
-            <div class="col-sm-3">
-                {!! Form::selectGroup('Routine Service Activity', 'routine_service_activity', ['' => '*SELECT*', 'castration' => 'castration', 'deworming' => 'Deworming', 'spaying' => 'Spaying', 'vitamin_injection' => 'Vitamin Injection', 'others' => 'Others']) !!}
-            </div>
-            <div class="col-sm-4">
-                {!! Form::inputGroup('text', '.. if others', 'other_routine_service_activity_extra') !!}
-            </div>
-            <div class="col-sm-5">
-                {!! Form::inputGroup('text', 'Remarks', 'routine_service_remarks') !!}
-            </div>
-        </div>
-        <hr>
         <div class="form-group">
             <label class="d-block">Upload photo</label>
             <input type="file" name="photo" class="form-control border-0 p-0" />
         </div>
         <hr>
-        <div class="row">
-            <div class="col-sm-3">
-                {!! Form::selectGroup('Registration Status', 'registration_status', ['' => '*SELECT*', 'pending' => 'Pending', 'approved' => 'Approved', 'rejected' => 'Rejected']) !!}
-            </div>
-        </div>
-        <hr>
+        {!! Form::hidden('registration_status', 'approved') !!}
         <button type="submit" class="btn btn-success">Submit</button>
         {!! Form::close() !!}
     </div>

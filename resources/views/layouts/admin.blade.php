@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('css')
 </head>
 <body>
 
@@ -25,7 +26,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.pet-registration.index') }}">Impound Requests</a>
+            <a class="nav-link" href="{{ route('admin.pet-registration.index') }}">Available Animals</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.adoption-request.index') }}">Adoption Requests </a>
@@ -37,9 +38,9 @@
               <a class="dropdown-item" href="{{ route('admin.adopted-pets.index') }}">
                 <i class="fa fa-chevron-right"></i> Adopted Pets
               </a>
-              <a class="dropdown-item" href="{{ route('admin.impounded-pets.index') }}">
+              {{-- <a class="dropdown-item" href="{{ route('admin.impounded-pets.index') }}">
                 <i class="fa fa-chevron-right"></i> Impounded Pets
-              </a>
+              </a> --}}
             </div>
           </li>
         </ul>

@@ -59,4 +59,9 @@ class AdoptionRequest extends Model
     {
         return asset("storage/{$this->proof_of_adoption}");
     }
+
+    public function is($status)
+    {
+        return strtolower($status) === strtolower($this->request_status);
+    }
 }
