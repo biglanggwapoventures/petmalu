@@ -38,6 +38,9 @@
               <a class="dropdown-item" href="{{ route('admin.adopted-pets.index') }}">
                 <i class="fa fa-chevron-right"></i> Adopted Pets
               </a>
+              <a class="dropdown-item" href="{{ route('admin.adopted-pets-map') }}">
+                <i class="fa fa-chevron-right"></i> Map
+              </a>
               {{-- <a class="dropdown-item" href="{{ route('admin.impounded-pets.index') }}">
                 <i class="fa fa-chevron-right"></i> Impounded Pets
               </a> --}}

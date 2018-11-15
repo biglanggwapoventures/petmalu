@@ -31,6 +31,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
     Route::patch('users/{user}/disable', 'DisabledUsersConroller@store');
     Route::patch('users/{user}/enable', 'DisabledUsersConroller@destroy');
 
+    Route::get('adopted-pet-map', 'AdoptedPetsMapController')->name('adopted-pets-map');
+
 });
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => 'role:standard,admin'], function () {
