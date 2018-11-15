@@ -49,6 +49,9 @@ class PetRegistrationController extends BaseController
     protected function validationArray()
     {
         $rules = [
+            'animal_story' => 'required',
+            'is_vaccinated' => 'required',
+            'neutered' => 'required',
             'reason' => 'required',
             'photo' => ['required', 'image', 'max:3072'],
             'ownership' => ['required', Rule::in(['household', 'community'])],
@@ -92,11 +95,11 @@ class PetRegistrationController extends BaseController
     {
         $pet = Pet::findOrFail($id);
 
-        if ($pet->is('approved')) {
-            return redirect()
-                ->back()
-                ->with('deletionError', 'Cannot delete approved pets.');
-        }
+        // if ($pet->is('approved')) {
+        //     return redirect()
+        //         ->back()
+        //         ->with('deletionError', 'Cannot delete approved pets.');
+        // }
 
         return parent::destroy($request, $id);
     }

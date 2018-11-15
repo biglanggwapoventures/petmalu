@@ -36,6 +36,18 @@ class AdoptionRequestController extends BaseController
         $this->validatedInput['user_id'] = Auth::id();
     }
 
+    public function afterStore($model)
+    {
+        // dd(request()->all());
+        $model->adoption_form = request()->all();
+        $model->save();
+    }
+
+    public function afterUpdate($model)
+    {
+        $this->afterStore($model);
+    }
+
     public function beforeUpdate()
     {
 
@@ -46,6 +58,11 @@ class AdoptionRequestController extends BaseController
         $query->latest()->whereUserId(Auth::id())->with('pet');
     }
 
+    public function beforeEdit($model)
+    {
+        $this->viewData['pet'] = Pet::with('adoptionRequest')->whereId($model->pet_id)->first();
+    }
+
     protected function validationArray()
     {
 
@@ -54,7 +71,8 @@ class AdoptionRequestController extends BaseController
     protected function storeActionValidator()
     {
         return [
-            'adoption_purpose' => 'required|string',
+            'adoption_purpose' => 'nullable|string',
+            'adoption_form' => 'nullable',
             'agreement' => 'accepted',
             'pet_id' => [
                 'required',

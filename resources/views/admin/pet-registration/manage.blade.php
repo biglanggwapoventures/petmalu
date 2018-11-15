@@ -21,7 +21,7 @@
               <p class="mb-0">{!! $resourceData->reason ?: '<em>No reason specified</em>' !!}</p>
             </div>
         @endif --}}
-        {!! Form::textAreaGroup('Story', 'story', null, ['rows' => 5]) !!}
+        {!! Form::textAreaGroup('Story', 'animal_story', null, ['rows' => 5]) !!}
 
         <div class="form-row">
 
@@ -40,16 +40,22 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-sm-6">
+            {{-- <div class="col-sm-6">
                 {!! Form::inputGroup('text', 'Location', 'origin') !!}
                 {!! Form::hidden('origin_longitude') !!}
                 {!! Form::hidden('origin_latitude') !!}
+            </div> --}}
+            <div class="col-sm-3">
+                    {!! Form::inputGroup('date', 'Birthdate', 'birthdate', null, ['max' => now()->format('Y-m-d')]) !!}
             </div>
             <div class="col-sm-3">
                 {!! Form::selectGroup('Species', 'species', ['' => '*SELECT*', 'dog' => 'Dog', 'cat' => 'Cat', 'others' => 'Others']) !!}
             </div>
             <div class="col-sm-3">
                 {!! Form::inputGroup('text', 'Breed', 'breed') !!}
+            </div>
+            <div class="col-sm-3">
+                    {!! Form::inputGroup('text', 'Color', 'color') !!}
             </div>
         </div>
         <div class="form-row">
@@ -60,10 +66,10 @@
                 {!! Form::selectGroup('Habitat', 'habitat', ['' => '*SELECT*', 'caged' => 'Caged', 'leashed' => 'Leashed', 'roaming' => 'Roaming', 'house_only' => 'House Only']) !!}
             </div>
             <div class="col-sm-3">
-                {!! Form::inputGroup('date', 'Birthdate', 'birthdate', null, ['max' => now()->format('Y-m-d')]) !!}
+                {!! Form::selectGroup('Anti-rabies?', 'is_vaccinated', ['' => '*SELECT*', '1' => 'Yes', '0' => 'No']) !!}
             </div>
-            <div class="col-sm-3">
-                {!! Form::inputGroup('text', 'Color', 'color') !!}
+            <div class="col-sm-2">
+                {!! Form::selectGroup('Neutered?', 'neutered', ['' => '*SELECT*', '1' => 'Yes', '0' => 'No']) !!}
             </div>
         </div>
         <hr>
@@ -79,8 +85,6 @@
             </div>
         </div>
         <hr>
-
-
         <div class="form-group">
             <label class="d-block">Upload photo</label>
             <input type="file" name="photo" class="form-control border-0 p-0" />

@@ -12,10 +12,10 @@
                       <td><strong>Name</strong></td>
                       <td>{{ $pet->pet_name }}</td>
                   </tr>
-                  <tr>
+                  {{-- <tr>
                       <td><strong>Date Seized</strong></td>
                       <td>{{ $pet->date_seized ? date_create($pet->date_seized)->format('M d, Y') : '-' }}</td>
-                  </tr>
+                  </tr> --}}
                   <tr>
                       <td><strong>Species</strong></td>
                       <td>{{ ucfirst($pet->species) }}</td>
@@ -40,28 +40,28 @@
                       <td><strong>Birthdate</strong></td>
                       <td>{{ $pet->birthdate ? date_create($pet->birthdate)->format('M d, Y') : 'n/a' }}</td>
                   </tr>
-                  <tr>
+                  {{-- <tr>
                       <td><strong>Area</strong></td>
                       <td>{{ $pet->origin }}</td>
-                  </tr>
+                  </tr> --}}
               </tbody>
             </table>
         </div>
     </div>
     <div class="col-sm-8">
-        @if($pet->origin_latitude && $pet->origin_longitude)
+        {{-- @if($pet->origin_latitude && $pet->origin_longitude)
             <div class="card">
-                <div class="card-body p-0" id="map" data-lat="{{ $pet->origin_latitude }}" data-lng="{{ $pet->origin_longitude }}" style="height: 500px;">
+                <div class="card-body  p-0" id="map" hidden data-lat="{{ $pet->origin_latitude }}" data-lng="{{ $pet->origin_longitude }}" style="height: 500px;">
 
                 </div>
             </div>
         @else
-            <div class="alert alert-danger text-center mb-0"><i class="fa fa-info-circle"></i> No tagged origin for this pet</div>
-        @endif
-        <div class="card mt-2">
+            <div class="alert alert-danger text-center  m-0" hidden><i class="fa fa-info-circle"></i> No tagged origin for this pet</div>
+        @endif --}}
+        <div class="card">
             <div class="card-body">
                 @if($request = auth()->user()->adoptionRequest($pet))
-                    <p class="card-text">
+                    {{-- <p class="card-text">
                         You have submitted an adoption request:
                     </p>
                     <p class="card-text">
@@ -71,11 +71,25 @@
                             {!! Form::hidden('id', $request->id)!!}
                             <button  type="submit" class="btn btn-danger btn-block mt-2">Cancel this request</button>
                         {!! Form::close() !!}
-                    </p>
-                @else
-                    <h5 class="card-title">State your purpose for adoption</h5>
+                    </p> --}}
+                    <h5 class="card-title">Adoption Request Form</h5>
                     {!! Form::open(['url' => route('user.adoption-request.store'), 'method' => 'POST', 'class' => 'ajax']) !!}
-                    {!! Form::textareaGroup(null, 'adoption_purpose', null, ['rows' => '3']) !!}
+                    {{-- {{dd($resourceData->toArray())}} --}}
+                    @include('user.adoption-request.adoption_form', $resourceData)
+                    
+
+                    {!! Form::hidden('pet_id', $pet->id) !!}
+                    {!! Form::checkbox('agreement', '1', 'I agree to pay 150.00 in adoption fees.') !!}
+                    <button type="submit" class="btn btn-block btn-success">Send request</button>
+                    {!! Form::close() !!}
+                @else
+                
+                    <h5 class="card-title">Adoption Request Form</h5>
+                    {!! Form::open(['url' => route('user.adoption-request.store'), 'method' => 'POST', 'class' => 'ajax']) !!}
+                    {{-- {{dd($resourceData->toArray())}} --}}
+                    @include('user.adoption-request.adoption_form', $resourceData)
+                    
+
                     {!! Form::hidden('pet_id', $pet->id) !!}
                     {!! Form::checkbox('agreement', '1', 'I agree to pay 150.00 in adoption fees.') !!}
                     <button type="submit" class="btn btn-block btn-success">Send request</button>

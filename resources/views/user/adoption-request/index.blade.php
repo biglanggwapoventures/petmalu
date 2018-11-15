@@ -32,7 +32,8 @@
                     <td>{{ $row->adoption_purpose }}</td>
                     <td>{{ ucfirst($row->request_status) }}</td>
                     <td>
-                        @if(!$row->is('approved'))
+                        @if($row->is('pending'))
+                        <a href="{{ route('user.adoption-request.edit', $row->id) }}" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</a>
                         {!! Form::open(['url' => route('user.adoption-request.cancel'), 'method' => 'POST', 'onsubmit' => "javascript: return confirm('Are you sure?')"]) !!}
                             {!! Form::hidden('id', $row->id)!!}
                             <button  type="submit" class="btn btn-danger btn-sm mt-2">Cancel</button>

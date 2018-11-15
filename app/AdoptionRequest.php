@@ -16,7 +16,12 @@ class AdoptionRequest extends Model
         'user_id',
         'request_status',
         'adoption_purpose',
+        'adoption_form',
         'proof_of_adoption',
+    ];
+
+    protected $casts = [
+        'adoption_form' => 'object'
     ];
 
     protected $appends = [

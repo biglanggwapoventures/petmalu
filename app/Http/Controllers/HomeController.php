@@ -37,7 +37,7 @@ class HomeController extends Controller
         });
 
         return view('welcome', [
-            'items' => $query->get(),
+            'items' => $query->get()->sortByDesc('id'),
         ]);
     }
 }
