@@ -34,7 +34,7 @@
         <tr>
             <th></th>
             <th>Pet</th>
-            <th>Past Owner</th>
+            {{-- <th>Past Owner</th> --}}
             <th>New Owner</th>
             <th>Date Adopted</th>
             <th></th>
@@ -49,11 +49,11 @@
             <br>
             {{ ucfirst($row->species) }} ({{ ucfirst($row->breed) }})
           </td>
-            <td>
+            {{-- <td>
                 <a href="javascript:void(0)" class="peeks-profile" data-profile="{{ data_get($row, 'owner')->toJson() }}">
                     {{ data_get($row, 'owner.name') }}
                 </a>
-            </td>
+            </td> --}}
           <td>
               <a href="javascript:void(0)" class="peeks-profile" data-profile="{{ data_get($row, 'approvedAdoptionRequest.requestor')->toJson() }}">
                   {{ data_get($row, 'approvedAdoptionRequest.requestor.name') }}

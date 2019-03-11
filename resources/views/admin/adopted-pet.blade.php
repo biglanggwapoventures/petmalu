@@ -16,10 +16,10 @@
                   <td><strong>Name</strong></td>
                   <td>{{ $pet->pet_name }}</td>
               </tr>
-              <tr>
+              {{-- <tr>
                   <td><strong>Date Seized</strong></td>
                   <td>{{ $pet->date_seized ? date_create($pet->date_seized)->format('M d, Y') : '-' }}</td>
-              </tr>
+              </tr> --}}
               <tr>
                   <td><strong>Cage Number</strong></td>
                   <td>{{ $pet->cage_number }}</td>

@@ -19,8 +19,17 @@ class ManagePetAdoptionRequestsController extends Controller
                 $req->id => $req->requestor->name,
             ];
         });
+        if($request->adoption_request_id){
+            $adoptionRequest = AdoptionRequest::whereId($request->adoption_request_id)->wherePetId($pet->id)->first();
+            return response()->json([
+                'data' => $adoptionRequest
+            ]);
+        }else{
+            $adoptionRequest = new AdoptionRequest;
+        }
+        
 
-        return view('admin.pet-adoption-requests', compact('pet', 'adoptionRequestDropdownFormat'));
+        return view('admin.pet-adoption-requests', compact('pet', 'adoptionRequestDropdownFormat', 'adoptionRequest'));
     }
 
     public function approve($petId, Request $request)

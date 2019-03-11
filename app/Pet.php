@@ -24,6 +24,9 @@ class Pet extends Model
     ];
 
     protected $fillable = [
+        'animal_story',
+        'is_vaccinated',
+        'neutered',
         'reason',
         'origin',
         'origin_latitude',
@@ -122,6 +125,11 @@ class Pet extends Model
     public function adoptionRequests()
     {
         return $this->hasMany(AdoptionRequest::class)->orderBy('created_at');
+    }
+
+    public function adoptionRequest()
+    {
+        return $this->hasOne(AdoptionRequest::class);
     }
 
     public function approvedAdoptionRequest()
